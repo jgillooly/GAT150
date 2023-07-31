@@ -12,7 +12,7 @@ void Player::Update(float dt) {
 
 	if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 		antares::Transform transform2 {m_transform.position, m_transform.rotation, 1};
-		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>( 400, 0, transform2, antares::g_manager.Get("Diamond.txt"));
+		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>( 400.0f, 0.0f, transform2, antares::g_manager.Get("Diamond.txt"));
 		weapon->m_tag = "PlayerBullet";
 		m_scene->Add(std::move(weapon));
 	}

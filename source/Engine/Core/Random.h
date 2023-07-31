@@ -9,6 +9,11 @@ namespace antares {
 	inline int randomex(unsigned int min, unsigned int max) { return min + random(max - min); }
 
 	inline float randomf() { return (float)random() / RAND_MAX; }
-	inline float randomf(float max) { return randomf() + random(max); }
-	inline float randomf(float min, float max) { return randomf() + randomex(min, max); }
+	inline float randomf(float max) { return randomf() * max; }
+	inline float randomf(float min, float max) { 
+		//original code here was giving me warnings for data loss so I looked up a better one on stack overflow
+		float random = ((float)rand()) / (float)RAND_MAX;
+		float range = max - min;
+		return (random * range) + min;
+	}
 }

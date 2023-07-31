@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 	}
 	std::string stri = "test";
 
-	antares::seedRandom(time(NULL));
+	antares::seedRandom((unsigned int)time(NULL));
 	antares::setFilePath("assets");
 	antares::writeFile("Test.txt", stri);
 	vector<Star> stars;
@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < 5; i++) {
 		float rotat = antares::randomf(antares::TwoPi);
 		antares::Transform t1{ {400, 300}, rotat, 2};
-		unique_ptr<Enemy> enemy = std::make_unique<Enemy>(antares::random(150, 250), 200, t1, antares::g_manager.Get("Diamond.txt"));
+		unique_ptr<Enemy> enemy = std::make_unique<Enemy>((float)antares::random(150, 250), (float)200, t1, antares::g_manager.Get("Diamond.txt"));
 		enemy->m_tag = "Enemy";
 		//scene.Add(std::move(enemy));
 	}

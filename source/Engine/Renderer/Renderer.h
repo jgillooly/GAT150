@@ -20,6 +20,7 @@ namespace antares {
 		void DrawPoint(int x, int y);
 		void DrawPoint(float x, float y) { DrawPoint((int)x, (int)y); }
 		void DrawLine(int x1, int y1, int x2, int y2);
+		void DrawLine(float x1, float y1, float x2, float y2);
 
 		int GetWidth() const { return m_width; };
 		int GetHeight() const { return m_height; };

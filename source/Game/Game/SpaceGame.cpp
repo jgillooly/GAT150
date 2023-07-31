@@ -93,7 +93,7 @@ void SpaceGame::Uptdate(float dt) {
 		m_milestone = m_score;
 		float speed = 100;
 		constexpr float turnRate = antares::Degrees2Radians(180.0f);
-		std::unique_ptr<Player> player = std::make_unique<Player>(400, antares::Pi, transform, antares::g_manager.Get("Diamond.txt"));
+		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform, antares::g_manager.Get("Diamond.txt"));
 
 		player->m_tag = "Player";
 		player->m_game = this;
@@ -109,7 +109,7 @@ void SpaceGame::Uptdate(float dt) {
 			if (isSpecial) std::cout << "Special Spawned" << std::endl;
 			float rotat = antares::randomf(antares::TwoPi);
 			antares::Transform t1{ {400, 300}, rotat, 2};
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(antares::random(150, 250), 200, t1, antares::g_manager.Get("DiamondR.txt"), isSpecial);
+			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>((float)antares::random(150, 250), (float)200, t1, antares::g_manager.Get("DiamondR.txt"), isSpecial);
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
 			m_scene->Add(std::move(enemy));
@@ -118,7 +118,7 @@ void SpaceGame::Uptdate(float dt) {
  			int x = antares::random(100, antares::g_renderer.GetWidth() - 100);
 			int y = antares::random(100, antares::g_renderer.GetHeight() - 100);
 			antares::Transform t2{ {x,y}, 0, 10};
-   			std::unique_ptr<Pickup> pickup = std::make_unique<Pickup>(t2, antares::g_manager.Get("DiamondH.txt"), 10);
+   			std::unique_ptr<Pickup> pickup = std::make_unique<Pickup>(t2, antares::g_manager.Get("DiamondH.txt"), 10.0f);
 			pickup->m_tag = "Pickup";
 			pickup->m_game = this;
 			m_scene->Add(std::move(pickup));

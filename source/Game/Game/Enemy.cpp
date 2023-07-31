@@ -29,13 +29,13 @@ void Enemy::Update(float dt) {
 	m_firetimer -= dt;
 	if (m_firetimer <= 0) {
 		antares::Transform transform2 {m_transform.position, m_transform.rotation, 1};
-		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400, 0, transform2, antares::g_manager.Get("DiamondB.txt"));
+		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, 0.0f, transform2, antares::g_manager.Get("DiamondB.txt"));
 		weapon->m_tag = "EnemyBullet";
 		m_scene->Add(std::move(weapon));
 		if (m_special) {
 			for (int i = 1; i <= 3; i++) {
-				transform2 = { m_transform.position, m_transform.rotation + (antares::HalfPi * i), 1 };
-				std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400, 0, transform2, antares::g_manager.Get("DiamondB.txt"));
+				transform2 = { m_transform.position, m_transform.rotation + (antares::HalfPi * i), 1.0f };
+				std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, 0.0f, transform2, antares::g_manager.Get("DiamondB.txt"));
 				weapon->m_tag = "EnemyBullet";
 				m_scene->Add(std::move(weapon));
 			}
@@ -52,16 +52,16 @@ void Enemy::OnCollision(Actor* other) {
 		data.burst = true;
 		data.burstCount = 100;
 		data.spawnRate = 200;
-		data.angle = 0;
+		data.angle = 0.0f;
 		data.angleRange = antares::Pi;
 		data.lifetimeMin = 0.5f;
 		data.lifetimeMax = 1.5f;
 		data.speedMin = 50;
 		data.speedMax = 250;
 		data.damping = 0.5f;
-		data.color = antares::Color{ 1, 0, 0, 1 };
-		antares::Transform transform{ m_transform.position, 0, 1 };
-		auto emitter = std::make_unique<antares::Emitter>(transform, data);
+		data.color = antares::Color{ 1.0f, 0.0f, 0.0f, 1.0f };
+		antares::Transform transform{ m_transform.position, 0.0f, 1.0f };
+		std::unique_ptr<antares::Emitter> emitter = std::make_unique<antares::Emitter>(transform, data);
 		emitter->m_lifespan = 1.0f;
 		emitter->m_tag = "Emitter";
 		m_scene->Add(std::move(emitter));
