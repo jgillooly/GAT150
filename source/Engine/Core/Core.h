@@ -1,3 +1,4 @@
+#include "Logger.h"
 #include "FileIO.h"
 #include "Memory.h"
 #include "Random.h"

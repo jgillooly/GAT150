@@ -12,6 +12,7 @@
 #include "Framework/Emitter.h"
 #include "Renderer/ParticleSystem.h"
 #include "Pickup.h"
+#include "Core/Core.h"
 
 bool SpaceGame::Initialize() {	
 	// create font / text objects

@@ -29,6 +29,11 @@ public:
 };
 
 int main(int argc, char* argv[]) {
+	INFO_LOG
+
+	std::cout << "Start Game" << std::endl;
+
+
 	antares::MemoryTracker::Initialize();
 	{
 		//std::unique_ptr<int> up = std::make_unique<int>(10);
@@ -42,7 +47,7 @@ int main(int argc, char* argv[]) {
 	antares::Renderer renderer;
 	antares::g_renderer.CreateWindow("window", 800, 600);
 	antares::g_renderer.Initialize();
-	cout << antares::g_renderer.GetWidth() << "x" << antares::g_renderer.GetHeight();
+	cout << "Window created: " << antares::g_renderer.GetWidth() << "x" << antares::g_renderer.GetHeight() << std::endl;
 
 	antares::g_inputSystem.Initialize();
 

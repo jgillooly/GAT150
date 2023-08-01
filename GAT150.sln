@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "source\Game\Game\Ga
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Input", "Input\Input.vcxproj", "{624150C0-D46A-43C6-8DB9-DF08EB2C0B85}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{7034C946-0776-493B-93D4-39CFBF4F111A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -74,6 +76,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D6B01F2C-781C-4656-8AAE-E8E0DADBC183} = {7034C946-0776-493B-93D4-39CFBF4F111A}
+		{CBE047A6-2EC7-4431-9F20-D09C58CB5604} = {7034C946-0776-493B-93D4-39CFBF4F111A}
+		{1F83608B-5BD2-4089-9D02-D6BE971A1E06} = {7034C946-0776-493B-93D4-39CFBF4F111A}
+		{84BA0668-414C-4556-B6CB-E1FCECAA557A} = {7034C946-0776-493B-93D4-39CFBF4F111A}
+		{624150C0-D46A-43C6-8DB9-DF08EB2C0B85} = {7034C946-0776-493B-93D4-39CFBF4F111A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D9F2FDC-509F-4192-B8F2-B485DD12C412}

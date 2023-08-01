@@ -25,7 +25,7 @@ namespace antares {
 					if (!(*iter1)->m_destroyed && !(*iter2)->m_destroyed) {
 						(*iter1)->OnCollision(iter2->get());
 						(*iter2)->OnCollision(iter1->get());
-						//std::cout << "Collision!" << (*iter1)->m_tag << " " << (*iter2)->m_tag << std::endl;
+						//std::cout << "Collision!" << (*iter1)->m_tag << " " << (*iter2)->m_tag << std::endl; // uncomment for debug :)
 					}
 				}
 			}
