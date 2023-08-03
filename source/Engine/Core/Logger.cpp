@@ -7,25 +7,25 @@ namespace antares {
 		if (logLevel < m_logLevel) return false;
 		switch (logLevel) {
 		case LogLevel::Info:
-			*m_ostream << "INFO: ";
+			*this << "INFO: ";
 			break;
 		case LogLevel::Warning:
-			*m_ostream << "WARNING: ";
+			*this << "WARNING: ";
 			break;
 		case LogLevel::Error:
-			*m_ostream << "ERROR: ";
+			*this << "ERROR: ";
 			break;
 		case LogLevel::Assert:
-			*m_ostream << "ASSERT: ";
+			*this << "ASSERT: ";
 			break;
 		default:
 			break;
 		}
 
-		*m_ostream << getFileName(filename) << "(" << lineNumber << ")" << std::endl;
+		*this << getFileName(filename) << "(" << lineNumber << ") - ";
 
 		return true;
 	}
 
-	Logger g_logger(LogLevel::Info, &std::cout);
+	Logger g_logger(LogLevel::Info, &std::cout, "Log.txt");
 }

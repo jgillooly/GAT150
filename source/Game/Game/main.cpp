@@ -2,6 +2,7 @@
 #include "Core/Core.h"
 #include <chrono>
 #include "Renderer/Renderer.h"
+#include "Renderer/Texture.h"
 #include "../../Input/InputSystem.h"
 #include <thread>
 #include "Audio/AudioSystem.h"
@@ -14,6 +15,9 @@
 #include "Renderer/Font.h"
 #include "Renderer/Text.h"
 #include "SpaceGame.h"
+#include <cassert>
+#include <array>
+#include <map>
 
 using namespace std;
 
@@ -28,11 +32,36 @@ public:
 	antares::Vector2 m_velocity;
 };
 
+template <typename T>
+void print(const std::string& s, const T& container) {
+	std::cout << s << std::endl;
+		for (auto element : container) {
+			std::cout << element << " ";
+		}
+	std::cout << std::endl;
+}
+
 int main(int argc, char* argv[]) {
-	INFO_LOG
 
-	std::cout << "Start Game" << std::endl;
+	int n[4] = { 1, 2, 3, 4 };
+	print("array: ", n);
 
+	cout << *(n + 1) << endl;
+
+	std::array<int, 4> na = { 1, 2, 3, 4 };
+	print("array class: ", na);
+
+	std::vector<int> nv = { 1, 2, 3, 4 };
+	print("vector: ", nv);
+
+	std::list<int> nl = { 1, 2, 3, 4 };
+	print("list:", nl);
+
+	std::map<std::string, int> ages;
+	ages["Charles"] = 17;
+	ages["Jacob"] = 19;
+
+	INFO_LOG("Start Game");
 
 	antares::MemoryTracker::Initialize();
 	{
@@ -84,6 +113,10 @@ int main(int argc, char* argv[]) {
 		//scene.Add(std::move(enemy));
 	}
 
+	//shared_ptr<antares::Texture> texture = make_shared<antares::Texture>();
+	//texture->Load("planet.jpg", antares::g_renderer);
+
+
 	bool quit = false;
 
 	//game loop
@@ -109,6 +142,7 @@ int main(int argc, char* argv[]) {
 		//drawing
 		antares::g_renderer.SetColor(0, 0, 0, 0);
 		antares::g_renderer.BeginFrame();
+		//antares::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
 		//text->Draw(antares::g_renderer, 400, 300);
 		//renderer.SetColor(255, 255, 255, SDL_ALPHA_OPAQUE);
 		for (auto& point : stars) {

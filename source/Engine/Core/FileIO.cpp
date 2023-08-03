@@ -30,7 +30,7 @@ namespace antares {
 
 	bool readFile(const std::filesystem::path& path, std::string& buffer) {
 		if (!fileExists(path)) {
-			WARNING_LOG;
+			WARNING_LOG("File not loaded: " << path.string());
 
 			return false;
 		}

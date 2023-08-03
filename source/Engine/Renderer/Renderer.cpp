@@ -1,5 +1,8 @@
 #include "Renderer.h"
+#include "Core/Core.h"
+#include "Texture.h"
 #include "SDL2-2.28.1/include/SDL_ttf.h"
+#include <SDL2-2.28.1/include/SDL_image.h>
 
 namespace antares {
 	SDL_Renderer* renderer{ nullptr };
@@ -14,7 +17,7 @@ namespace antares {
 	bool Renderer::Initialize() {
 		SDL_Init(SDL_INIT_VIDEO);
 		TTF_Init();
-
+		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 		return true;
 	}
 
@@ -22,6 +25,7 @@ namespace antares {
 		SDL_DestroyRenderer(m_renderer);
 		SDL_DestroyWindow(m_window);
 		TTF_Quit();
+		IMG_Quit();		
 	}
 
 	void Renderer::CreateWindow(const std::string& title, int width, int height) {
@@ -54,6 +58,16 @@ namespace antares {
 	}
 	void Renderer::DrawLine(float x1, float y1, float x2, float y2) {
 		SDL_RenderDrawLineF(m_renderer, x1, y1, x2, y2);
+	}
+	void Renderer::DrawTexture(Texture* texture, float x, float y, float angle) {
+		vec2 size = texture->GetSize();
+		SDL_Rect dest;
+		dest.x = x;
+		dest.y = y;
+		dest.w = size.x;
+		dest.h = size.y;
+			// https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, NULL, &dest, angle, NULL, SDL_FLIP_NONE);
 	}
 	Renderer g_renderer;
 }

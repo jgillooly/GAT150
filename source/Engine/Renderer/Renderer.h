@@ -22,9 +22,12 @@ namespace antares {
 		void DrawLine(int x1, int y1, int x2, int y2);
 		void DrawLine(float x1, float y1, float x2, float y2);
 
+		void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
+
 		int GetWidth() const { return m_width; };
 		int GetHeight() const { return m_height; };
 		friend class Text;
+		friend class Texture;
 	private:
 		int m_width = 0;
 		int m_height = 0;
