@@ -7,7 +7,7 @@ namespace antares {
 	Texture::~Texture() {
 		if (m_texture) SDL_DestroyTexture(m_texture);
 	}
-	bool Texture::Load(const std::string filename, class Renderer& renderer) {
+	bool Texture::Load(const std::string& filename, class Renderer& renderer) {
 		SDL_Surface* surface = IMG_Load(filename.c_str());
 		if (!surface) {
 			WARNING_LOG("File not found" << filename);
@@ -29,7 +29,14 @@ namespace antares {
 		return vec2{ point.x, point.y};
 	}
 	bool Texture::Create(std::string filename, ...) {
+		va_list args;
 
-		return true;
+		va_start(args, filename);
+
+		Renderer& renderer = va_arg(args, Renderer);
+
+		va_end(args);
+
+		return Load(filename, renderer);
 	}
 }

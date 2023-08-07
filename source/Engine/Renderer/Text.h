@@ -13,6 +13,7 @@ namespace antares {
 		~Text();
 		void Create(Renderer& renderer, const std::string& text, const Color& color);
 		void Draw(Renderer& renderer, int x, int y);
+		friend class SpaceGame;
 	private:
 		std::shared_ptr<Font> m_font;
 		struct SDL_Texture* m_texture = nullptr;

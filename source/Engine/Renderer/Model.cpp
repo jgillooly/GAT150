@@ -45,6 +45,11 @@ namespace antares {
 		return true;
 	}
 
+	bool Model::Create(std::string filename, ...) {
+
+		return Load(filename);
+	}
+
 	float Model::GetRadius() {
 		if (m_radius) return m_radius;
 		for (auto point : m_points) {

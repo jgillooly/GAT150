@@ -3,6 +3,7 @@
 #include "Renderer/Model.h"
 #include "Renderer/Renderer.h"
 #include "Framework/Game.h"
+#include "Components/Component.h"
 #include <memory>
 
 namespace antares {
@@ -17,6 +18,8 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw(antares::Renderer& renderer);
 
+	void AddComponent(std::unique_ptr<Component> component);
+
 	float GetRadius() { return (m_model) ? m_model->GetRadius() * m_transform.scale : -10000; }
 
 	virtual void OnCollision(Actor* other) {}
@@ -29,7 +32,9 @@ public:
 
 	std::string m_tag;
 	inline bool isDestroyed() { return m_destroyed; }
+	friend class SpaceGame;
 protected:
+	std::vector<std::shared_ptr<Component>> m_components;
 	//antares::Model m_model;
 	std::shared_ptr<Model> m_model;
 

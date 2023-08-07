@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 
 namespace antares {
 	class Resource {
@@ -10,4 +11,7 @@ namespace antares {
 	protected:
 
 	};
+
+	template<typename T>
+	using res_t = std::shared_ptr<T>;
 }

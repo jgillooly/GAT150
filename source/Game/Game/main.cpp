@@ -18,6 +18,7 @@
 #include <cassert>
 #include <array>
 #include <map>
+#include "Framework/Resource/ResourceManager.h"
 
 using namespace std;
 
@@ -39,6 +40,18 @@ void print(const std::string& s, const T& container) {
 			std::cout << element << " ";
 		}
 	std::cout << std::endl;
+}
+
+void print_arg(int count, ...) {
+	va_list args;
+
+
+
+	va_start(args, count);
+	for (int i = 0; i < count; ++i) {
+		std::cout << va_arg(args, const char*) << std::endl;
+	}
+	va_end(args);
 }
 
 int main(int argc, char* argv[]) {
@@ -113,8 +126,9 @@ int main(int argc, char* argv[]) {
 		//scene.Add(std::move(enemy));
 	}
 
-	//shared_ptr<antares::Texture> texture = make_shared<antares::Texture>();
+	shared_ptr<antares::Texture> texture = antares::g_resMan.Get<antares::Texture>("planet.jpg", antares::g_renderer);
 	//texture->Load("planet.jpg", antares::g_renderer);
+
 
 
 	bool quit = false;
@@ -142,20 +156,20 @@ int main(int argc, char* argv[]) {
 		//drawing
 		antares::g_renderer.SetColor(0, 0, 0, 0);
 		antares::g_renderer.BeginFrame();
-		//antares::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
+		antares::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
 		//text->Draw(antares::g_renderer, 400, 300);
 		//renderer.SetColor(255, 255, 255, SDL_ALPHA_OPAQUE);
-		for (auto& point : stars) {
-			int r = antares::random(256);
-			int g = antares::random(256);
-			int b = antares::random(256);
-			antares::g_renderer.SetColor(255, 255, 255, SDL_ALPHA_OPAQUE);
-			point.Update();
-			if (point.m_position.x > antares::g_renderer.GetWidth()) point.m_position.x = 0;
-			if (point.m_position.y > antares::g_renderer.GetHeight()) point.m_position.y = 0;
+		//for (auto& point : stars) {
+		//	int r = antares::random(256);
+		//	int g = antares::random(256);
+		//	int b = antares::random(256);
+		//	antares::g_renderer.SetColor(255, 255, 255, SDL_ALPHA_OPAQUE);
+		//	point.Update();
+		//	if (point.m_position.x > antares::g_renderer.GetWidth()) point.m_position.x = 0;
+		//	if (point.m_position.y > antares::g_renderer.GetHeight()) point.m_position.y = 0;
 
-			antares::g_renderer.DrawPoint(point.m_position.x, point.m_position.y);
-		}
+		//	antares::g_renderer.DrawPoint(point.m_position.x, point.m_position.y);
+		//}
 		//scene.Update(antares::g_time.getDeltaTime());
 		//scene.Draw(antares::g_renderer);
 		//enemy.Update(antares::g_time.getDeltaTime());

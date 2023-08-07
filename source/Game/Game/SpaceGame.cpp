@@ -13,10 +13,12 @@
 #include "Renderer/ParticleSystem.h"
 #include "Pickup.h"
 #include "Core/Core.h"
+#include "Framework/Resource/ResourceManager.h"
+#include "Framework/Components/SpriteComponent.h"
 
 bool SpaceGame::Initialize() {	
 	// create font / text objects
-	m_font = std::make_shared<antares::Font>("Quattrocento.ttf", 36);
+	m_font = antares::g_resMan.Get<antares::Font>("Quattrocento.ttf", 36);
 	m_scoreText = std::make_unique<antares::Text>(m_font);
 	m_scoreText->Create(antares::g_renderer, "SCORE: 0000", antares::Color{ 1, 1, 1, 1 });
 	
@@ -64,22 +66,22 @@ void SpaceGame::Uptdate(float dt) {
 		}
 		
 		if (antares::g_inputSystem.GetMouseButtonDown(0)) {
-			antares::EmitterData data;
-			data.burst = true;
-			data.burstCount = 100;
-			data.spawnRate = 200;
-			data.angle = 0;
-			data.angleRange = antares::Pi;
-			data.lifetimeMin = 0.5f;
-			data.lifetimeMax = 1.5f;
-			data.speedMin = 50;
-			data.speedMax = 250;
-			data.damping = 0.5f;
-			data.color = antares::Color{ 1, 0, 0, 1 };
-			antares::Transform transform{ { antares::g_inputSystem.GetMousePosition() }, 0, 1 };
-			auto emitter = std::make_unique<antares::Emitter>(transform, data);
-			emitter->m_lifespan = 1.0f;
-			m_scene->Add(std::move(emitter));
+			//antares::EmitterData data;
+			//data.burst = true;
+			//data.burstCount = 100;
+			//data.spawnRate = 200;
+			//data.angle = 0;
+			//data.angleRange = antares::Pi;
+			//data.lifetimeMin = 0.5f;
+			//data.lifetimeMax = 1.5f;
+			//data.speedMin = 50;
+			//data.speedMax = 250;
+			//data.damping = 0.5f;
+			//data.color = antares::Color{ 1, 0, 0, 1 };
+			//antares::Transform transform{ { antares::g_inputSystem.GetMousePosition() }, 0, 1 };
+			//auto emitter = std::make_unique<antares::Emitter>(transform, data);
+			//emitter->m_lifespan = 1.0f;
+			//m_scene->Add(std::move(emitter));
 		}
 
 		break;
@@ -95,7 +97,10 @@ void SpaceGame::Uptdate(float dt) {
 		float speed = 100;
 		constexpr float turnRate = antares::Degrees2Radians(180.0f);
 		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform, antares::g_manager.Get("Diamond.txt"));
+		std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
+		component->m_texture = antares::g_resMan.Get<antares::Texture>("planet.jpg");
 
+		player->AddComponent(std::move(component));
 		player->m_tag = "Player";
 		player->m_game = this;
 		m_scene->Add(std::move(player));
@@ -154,14 +159,14 @@ void SpaceGame::Uptdate(float dt) {
 		break;
 	}
 
-	m_scoreText->Create(antares::g_renderer, "Score:" + std::to_string(m_score), antares::Color{ 1, 1, 1, 1 });
-	m_livesText->Create(antares::g_renderer, "Lives:" + std::to_string(m_lives), antares::Color{ 1, 1, 1, 1 });
+	//m_scoreText->Create(antares::g_renderer, "Score:" + std::to_string(m_score), antares::Color{ 1, 1, 1, 1 });
+	//m_livesText->Create(antares::g_renderer, "Lives:" + std::to_string(m_lives), antares::Color{ 1, 1, 1, 1 });
 	Player* p = m_scene->GetActor<Player>();
 	std::string status = "";
 	if (p) {
 		status = p->getBoostStatus();
 	}
-	m_boostText->Create(antares::g_renderer, "Boost Status: " + status, antares::Color{ 1, 1, 1, 1 });
+	//m_boostText->Create(antares::g_renderer, "Boost Status: " + status, antares::Color{ 1, 1, 1, 1 });
 	m_scene->Update(dt);
 	antares::g_particleSystem.Update(dt);
 }

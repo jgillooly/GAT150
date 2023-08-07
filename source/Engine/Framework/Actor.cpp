@@ -1,4 +1,5 @@
 #include "Actor.h"
+#include "Components/RenderComponent.h"
 namespace antares {
 	void Actor::Update(float dt) {
 		if (m_lifespan != -1.0f) {
@@ -7,5 +8,15 @@ namespace antares {
 		}
 	}
 	void Actor::Draw(antares::Renderer& renderer) {
-	m_model->Draw(renderer, m_transform);
-}}
+		for (auto& component : m_components) {
+			RenderComponent* renderable = dynamic_cast<RenderComponent*>(component.get());
+			if (renderable) {
+				renderable->Draw(renderer);
+			}
+		}
+	}
+	void Actor::AddComponent(std::unique_ptr<Component> component) {
+		component->m_owner = this;
+		m_components.push_back(std::move(component));
+	}
+}
