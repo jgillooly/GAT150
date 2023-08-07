@@ -10,7 +10,7 @@ namespace antares {
 class Actor {
 public:
 	Actor() = default;
-	Actor(const antares::Transform& transform, std::shared_ptr<Model> model) : m_transform{transform}, m_model {model} {}
+	Actor(const antares::Transform& transform, std::shared_ptr<Model> model) : m_transform{transform} {}
 	Actor(const antares::Transform& transform) :
 		m_transform{ transform } {
 	}
@@ -20,7 +20,7 @@ public:
 
 	void AddComponent(std::unique_ptr<Component> component);
 
-	float GetRadius() { return (m_model) ? m_model->GetRadius() * m_transform.scale : -10000; }
+	float GetRadius() { return 30.0f; }
 
 	virtual void OnCollision(Actor* other) {}
 
@@ -36,7 +36,6 @@ public:
 protected:
 	std::vector<std::shared_ptr<Component>> m_components;
 	//antares::Model m_model;
-	std::shared_ptr<Model> m_model;
 
 	bool m_destroyed = false;
 	float m_lifespan = -1.0f;

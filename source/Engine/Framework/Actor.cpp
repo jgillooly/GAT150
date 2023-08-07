@@ -6,6 +6,10 @@ namespace antares {
 			m_lifespan -= dt;
 			m_destroyed = (m_lifespan <= 0);
 		}
+
+		for (auto& component : m_components) {
+			component->Update(dt);
+		}
 	}
 	void Actor::Draw(antares::Renderer& renderer) {
 		for (auto& component : m_components) {

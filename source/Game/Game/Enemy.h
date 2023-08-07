@@ -3,15 +3,9 @@
 #include <Renderer/Model.h>
 class Enemy : public antares::Actor {
 public:
-	Enemy(float speed, float turnRate, const antares::Transform& transform, std::shared_ptr<antares::Model> model) :
-		Actor{ transform, model },
-		m_speed{ speed }, m_turnRate{ turnRate } {
-		m_firetime = 2.0f;
-		m_firetimer = antares::randomf(0.0f, m_firetime);
-	}
-	Enemy(float speed, float turnRate, const antares::Transform& transform, std::shared_ptr<antares::Model> model, bool special) :
-		Actor{ transform, model },
-		m_speed{ speed }, m_turnRate{ turnRate }, m_special{ special } {
+	Enemy(float speed, float turnRate, const antares::Transform& transform) :
+		Actor{ transform },
+		m_speed{ speed }, m_turnRate{ turnRate }, m_special{ false } {
 		m_firetime = 2.0f;
 		m_firetimer = antares::randomf(0.0f, m_firetime);
 	}

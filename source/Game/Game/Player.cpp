@@ -6,16 +6,25 @@
 #include "SpaceGame.h"
 #include "Framework/Emitter.h"
 #include "Renderer/ParticleSystem.h"
+#include "Framework/Components/SpriteComponent.h"
+#include "Framework/Resource/ResourceManager.h"
+#include "Framework/Components/EnginePhysicsComponent.h"
 
 void Player::Update(float dt) {
 	Actor::Update(dt);
 
 	if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 		antares::Transform transform2 {m_transform.position, m_transform.rotation, 1};
-		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>( 400.0f, 0.0f, transform2, antares::g_manager.Get("Diamond.txt"));
+		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, 0.0f, transform2);
 		weapon->m_tag = "PlayerBullet";
+		std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
+		component->m_texture = antares::g_resMan.Get<antares::Texture>("Rocket.png", antares::g_renderer);
+		weapon->AddComponent(std::move(component));
 		m_scene->Add(std::move(weapon));
 	}
+
+	auto physicsComponent = GetComponent<antares::EnginePhysicsComponent>();
+	physicsComponent->Update(dt);
 
 	float rotate = 0;
 	if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) rotate = -1;

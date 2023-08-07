@@ -23,4 +23,17 @@ private:
 	float m_boostActiveTime = 2;
 	float m_boostActiveTimer = 0;
 	bool m_boosting = false;
+	template<typename T>
+	T* GetComponent();
 };
+template<typename T>
+inline T* Player::GetComponent() {
+	for (auto& component : m_components) {
+		T* result = dynamic_cast<T*>(component.get());
+		if (result) return result;
+	}
+
+	return nullptr;
+}
+
+

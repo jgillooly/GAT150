@@ -62,8 +62,8 @@ namespace antares {
 	void Renderer::DrawTexture(Texture* texture, float x, float y, float angle) {
 		vec2 size = texture->GetSize();
 		SDL_Rect dest;
-		dest.x = x;
-		dest.y = y;
+		dest.x = (int)(x - (size.x * 0.5f));
+		dest.y = (int)(y - (size.y * 0.5f));
 		dest.w = size.x;
 		dest.h = size.y;
 			// https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx

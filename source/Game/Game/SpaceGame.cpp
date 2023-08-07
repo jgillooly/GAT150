@@ -15,6 +15,7 @@
 #include "Core/Core.h"
 #include "Framework/Resource/ResourceManager.h"
 #include "Framework/Components/SpriteComponent.h"
+#include <Framework/Components/EnginePhysicsComponent.h>
 
 bool SpaceGame::Initialize() {	
 	// create font / text objects
@@ -98,9 +99,10 @@ void SpaceGame::Uptdate(float dt) {
 		constexpr float turnRate = antares::Degrees2Radians(180.0f);
 		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform, antares::g_manager.Get("Diamond.txt"));
 		std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
-		component->m_texture = antares::g_resMan.Get<antares::Texture>("planet.jpg");
-
+		component->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
+		auto physicsComponent = std::make_unique<antares::EnginePhysicsComponent>();
 		player->AddComponent(std::move(component));
+		player->AddComponent(std::move(physicsComponent));
 		player->m_tag = "Player";
 		player->m_game = this;
 		m_scene->Add(std::move(player));
@@ -115,7 +117,9 @@ void SpaceGame::Uptdate(float dt) {
 			if (isSpecial) std::cout << "Special Spawned" << std::endl;
 			float rotat = antares::randomf(antares::TwoPi);
 			antares::Transform t1{ {400, 300}, rotat, 2};
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>((float)antares::random(150, 250), (float)200, t1, antares::g_manager.Get("DiamondR.txt"), isSpecial);
+			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(200.0f, 200.0f, t1);
+			std::unique_ptr<antares::SpriteComponent> component1 = std::make_unique<antares::SpriteComponent>();
+			component1->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
 			m_scene->Add(std::move(enemy));
