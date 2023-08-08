@@ -1,5 +1,6 @@
 #include "Model.h"
 #include "Core/FileIO.h"
+#include "Renderer.h"
 #include <sstream>
 
 namespace antares {

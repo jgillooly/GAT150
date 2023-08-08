@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Core.h"
-#include "Renderer.h"
 namespace antares {
+	class Renderer;
 	struct ParticleData
 	{
 		vec2 position;

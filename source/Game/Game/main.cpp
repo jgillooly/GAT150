@@ -2,23 +2,17 @@
 #include "Core/Core.h"
 #include <chrono>
 #include "Renderer/Renderer.h"
-#include "Renderer/Texture.h"
 #include "../../Input/InputSystem.h"
 #include <thread>
 #include "Audio/AudioSystem.h"
-#include "Framework/Actor.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "Framework/Scene.h"
 #include "Weapon.h"
-#include "Renderer/ModelManager.h"
-#include "Renderer/Font.h"
-#include "Renderer/Text.h"
 #include "SpaceGame.h"
 #include <cassert>
 #include <array>
 #include <map>
-#include "Framework/Resource/ResourceManager.h"
+#include "Framework/Framework.h"
 
 using namespace std;
 
@@ -54,37 +48,29 @@ void print_arg(int count, ...) {
 	va_end(args);
 }
 
+void zero(int v) {
+	v = 0;
+}
+
+void zero(int* v) {
+	*v = 0;
+}
+
+void zero_ref(int& v) {
+	v = 0;
+}
+
+
 int main(int argc, char* argv[]) {
 
-	int n[4] = { 1, 2, 3, 4 };
-	print("array: ", n);
+	
 
-	cout << *(n + 1) << endl;
-
-	std::array<int, 4> na = { 1, 2, 3, 4 };
-	print("array class: ", na);
-
-	std::vector<int> nv = { 1, 2, 3, 4 };
-	print("vector: ", nv);
-
-	std::list<int> nl = { 1, 2, 3, 4 };
-	print("list:", nl);
-
-	std::map<std::string, int> ages;
-	ages["Charles"] = 17;
-	ages["Jacob"] = 19;
-
-	INFO_LOG("Start Game");
+	INFO_LOG("Initialize Game");
 
 	antares::MemoryTracker::Initialize();
-	{
-		//std::unique_ptr<int> up = std::make_unique<int>(10);
-	}
-	std::string stri = "test";
 
 	antares::seedRandom((unsigned int)time(NULL));
 	antares::setFilePath("assets");
-	antares::writeFile("Test.txt", stri);
 	vector<Star> stars;
 	antares::Renderer renderer;
 	antares::g_renderer.CreateWindow("window", 800, 600);

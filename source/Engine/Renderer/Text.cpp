@@ -1,6 +1,7 @@
 #include "Text.h"
 #include "Font.h"
 #include <SDL2-2.28.1/include/SDL_ttf.h>
+#include "Renderer.h"
 namespace antares {
 	Text::~Text() {
 		if (m_texture) SDL_DestroyTexture(m_texture);

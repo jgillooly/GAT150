@@ -2,8 +2,8 @@
 #include "Framework/Actor.h"
 class Player : public antares::Actor {
 public:
-	Player(float speed, float turnRate, const antares::Transform& transform, std::shared_ptr<antares::Model> model) :
-		Actor{ transform, model },
+	Player(float speed, float turnRate, const antares::Transform& transform) :
+		Actor{ transform },
 		m_speed{speed}, m_turnRate{turnRate}
 	{
 		m_boostSpeed = m_speed * 2;

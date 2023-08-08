@@ -1,10 +1,10 @@
 #pragma once
 #include "Core/Core.h"
-#include "Renderer.h"
 #include "Framework/Resource/Resource.h"
 #include <vector>
 
 namespace antares {
+	class Renderer;
 	class Model : public Resource{
 	public:
 		Model() = default;

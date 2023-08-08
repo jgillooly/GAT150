@@ -2,6 +2,11 @@
 #include <string>
 //#include "SDL2-2.28.1/include/SDL.h"
 #include <SDL2-2.28.1/include/SDL.h>
+#include "Font.h"
+#include "Model.h"
+#include "ParticleSystem.h"
+#include "Text.h"
+#include "Texture.h"
 
 namespace antares {
 	class Renderer {

@@ -6,16 +6,8 @@
 #include "Audio/AudioSystem.h"
 #include "../../Input/InputSystem.h"
 #include <memory>
-#include "Core/Transform.h"
-#include "Renderer/ModelManager.h"
-#include "Framework/Scene.h"
-#include "Framework/Emitter.h"
-#include "Renderer/ParticleSystem.h"
 #include "Pickup.h"
-#include "Core/Core.h"
-#include "Framework/Resource/ResourceManager.h"
-#include "Framework/Components/SpriteComponent.h"
-#include <Framework/Components/EnginePhysicsComponent.h>
+#include "Framework/Framework.h"
 
 bool SpaceGame::Initialize() {	
 	// create font / text objects
@@ -97,7 +89,7 @@ void SpaceGame::Uptdate(float dt) {
 		m_milestone = m_score;
 		float speed = 100;
 		constexpr float turnRate = antares::Degrees2Radians(180.0f);
-		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform, antares::g_manager.Get("Diamond.txt"));
+		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform);
 		std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
 		component->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
 		auto physicsComponent = std::make_unique<antares::EnginePhysicsComponent>();
@@ -125,15 +117,15 @@ void SpaceGame::Uptdate(float dt) {
 			m_scene->Add(std::move(enemy));
 		}
 		if (m_score >= m_milestone + 200) {
- 			int x = antares::random(100, antares::g_renderer.GetWidth() - 100);
-			int y = antares::random(100, antares::g_renderer.GetHeight() - 100);
-			antares::Transform t2{ {x,y}, 0, 10};
-   			std::unique_ptr<Pickup> pickup = std::make_unique<Pickup>(t2, antares::g_manager.Get("DiamondH.txt"), 10.0f);
-			pickup->m_tag = "Pickup";
-			pickup->m_game = this;
-			m_scene->Add(std::move(pickup));
-			m_milestone = m_score;
-			std::cout << "Pickup Spawned at: " << x << "," << y << std::endl;
+ 			//int x = antares::random(100, antares::g_renderer.GetWidth() - 100);
+			//int y = antares::random(100, antares::g_renderer.GetHeight() - 100);
+			//antares::Transform t2{ {x,y}, 0, 10};
+   			//std::unique_ptr<Pickup> pickup = std::make_unique<Pickup>(t2, NULL, 10.0f);
+			//pickup->m_tag = "Pickup";
+			//pickup->m_game = this;
+			//m_scene->Add(std::move(pickup));
+			//m_milestone = m_score;
+			//std::cout << "Pickup Spawned at: " << x << "," << y << std::endl;
 		}
 		break;
 	case SpaceGame::PlayerDead:
