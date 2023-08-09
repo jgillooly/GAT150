@@ -16,7 +16,17 @@ namespace antares {
 	}
 
 	void Model::Draw(Renderer& renderer, const antares::Transform tf) {
-		Draw(renderer, tf.position, tf.rotation, tf.scale);
+		if (m_points.size() < 2) return;
+		
+		mat2 mx = tf.GetMatrix();
+
+		renderer.SetColor(Color::toInt(m_color.r), Color::toInt(m_color.g), Color::toInt(m_color.b), Color::toInt(m_color.a));
+		for (int i = 0; i < m_points.size() - 1; i++) {
+			vec2 p1 = (mx * m_points[i]) + tf.position;
+			vec2 p2 = (mx * m_points[i + 1]) + tf.position;
+
+			renderer.DrawLine(p1.x, p1.y, p2.x, p2.y);
+		}
 	}
 
 	

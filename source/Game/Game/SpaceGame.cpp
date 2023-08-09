@@ -90,8 +90,12 @@ void SpaceGame::Uptdate(float dt) {
 		float speed = 100;
 		constexpr float turnRate = antares::Degrees2Radians(180.0f);
 		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform);
-		std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
-		component->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
+		//std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
+		//component->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
+
+		std::unique_ptr<antares::ModelRenderComponent> component = std::make_unique<antares::ModelRenderComponent>();
+		component->m_model = antares::g_resMan.Get<antares::Model>("Diamond.txt");
+
 		auto physicsComponent = std::make_unique<antares::EnginePhysicsComponent>();
 		player->AddComponent(std::move(component));
 		player->AddComponent(std::move(physicsComponent));
@@ -101,7 +105,7 @@ void SpaceGame::Uptdate(float dt) {
 		m_state = eState::Game;
 		break; }
 	case SpaceGame::Game:
-		m_spawnTimer += dt;
+		//m_spawnTimer += dt;
 		if (m_spawnTimer >= m_spawnTime) {
 			m_spawnTimer = 0;
 			int specialRoll = antares::random(1, 100);
@@ -114,6 +118,7 @@ void SpaceGame::Uptdate(float dt) {
 			component1->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
+			enemy->AddComponent(std::move(component1));
 			m_scene->Add(std::move(enemy));
 		}
 		if (m_score >= m_milestone + 200) {

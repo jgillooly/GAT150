@@ -1,1 +1,1 @@
-INFO: main.cpp(77) - Start Game
+INFO: main.cpp(68) - Initialize Game
