@@ -1,6 +1,6 @@
 #pragma once
 #include "Vector2.h"
-#include "Math/Matrix22.h"
+#include "Math/Matrix33.h"
 
 namespace antares {
 	class Transform {
@@ -13,11 +13,12 @@ namespace antares {
 		Transform() = default;
 		Transform (const vec2& position, float rotation, float scale = 1) : position {position}, rotation {rotation}, scale {scale} {}
 
-		mat2 GetMatrix() const {
-			mat2 ms = Matrix22::CreateScale(scale);
-			mat2 mr = Matrix22::CreateRotation(rotation);
+		mat3 GetMatrix() const {
+			mat3 ms = Matrix33::CreateScale(scale);
+			mat3 mr = Matrix33::CreateRotation(rotation);
+			mat3 mt = Matrix33::CreateTranslation(position);
 
-			return ( ms * mr );
+			return ( mt * ms * mr );
 		}
 	};
 }
