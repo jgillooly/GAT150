@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Actor.h"
+#include "Framework/Components/EnginePhysicsComponent.h"
 class Player : public antares::Actor {
 public:
 	Player(float speed, float turnRate, const antares::Transform& transform) :
@@ -8,6 +9,9 @@ public:
 	{
 		m_boostSpeed = m_speed * 2;
 	}
+
+	bool Initialize() override;
+
 	void Update(float dt) override;
 
 	void OnCollision(Actor* other) override;
@@ -23,17 +27,9 @@ private:
 	float m_boostActiveTime = 2;
 	float m_boostActiveTimer = 0;
 	bool m_boosting = false;
-	template<typename T>
-	T* GetComponent();
-};
-template<typename T>
-inline T* Player::GetComponent() {
-	for (auto& component : m_components) {
-		T* result = dynamic_cast<T*>(component.get());
-		if (result) return result;
-	}
 
-	return nullptr;
-}
+	antares::EnginePhysicsComponent* m_pComponent = nullptr;
+};
+
 
 

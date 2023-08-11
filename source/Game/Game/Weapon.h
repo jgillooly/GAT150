@@ -10,6 +10,8 @@
 		}
 		void Update(float dt) override;
 
+		bool Initialize() override;
+
 		void OnCollision(Actor* other) override;
 	private:
 		float m_speed = 0;

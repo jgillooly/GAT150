@@ -34,6 +34,9 @@
     <ClCompile Include="Components\EnginePhysicsComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\CircleCollisionComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -74,6 +77,15 @@
     </ClInclude>
     <ClInclude Include="Framework.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CollisionComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CircleCollisionComponent.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

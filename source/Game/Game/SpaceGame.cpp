@@ -90,17 +90,24 @@ void SpaceGame::Uptdate(float dt) {
 		float speed = 100;
 		constexpr float turnRate = antares::Degrees2Radians(180.0f);
 		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform);
-		//std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
-		//component->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
+		std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
+		component->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
 
-		std::unique_ptr<antares::ModelRenderComponent> component = std::make_unique<antares::ModelRenderComponent>();
-		component->m_model = antares::g_resMan.Get<antares::Model>("Diamond.txt");
+		//std::unique_ptr<antares::ModelRenderComponent> component = std::make_unique<antares::ModelRenderComponent>();
+		//component->m_model = antares::g_resMan.Get<antares::Model>("Diamond.txt");
 
 		auto physicsComponent = std::make_unique<antares::EnginePhysicsComponent>();
 		player->AddComponent(std::move(component));
 		player->AddComponent(std::move(physicsComponent));
+
+		auto cComponent = std::make_unique<antares::CircleCollisionComponent>();
+		cComponent->m_radius = 30.0f;
+		player->AddComponent(std::move(cComponent));
+
 		player->m_tag = "Player";
 		player->m_game = this;
+		player->m_transform.scale = 0.5f;
+		player->Initialize();
 		m_scene->Add(std::move(player));
 		m_state = eState::Game;
 		break; }
@@ -116,9 +123,14 @@ void SpaceGame::Uptdate(float dt) {
 			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(200.0f, 200.0f, t1);
 			std::unique_ptr<antares::SpriteComponent> component1 = std::make_unique<antares::SpriteComponent>();
 			component1->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
+
+			auto eCComponent = std::make_unique <antares::CircleCollisionComponent>();
+			eCComponent->m_radius = 30.0f;
+			enemy->AddComponent(std::move(eCComponent));
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
 			enemy->AddComponent(std::move(component1));
+			enemy->Initialize();
 			m_scene->Add(std::move(enemy));
 		}
 		if (m_score >= m_milestone + 200) {

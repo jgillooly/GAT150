@@ -8,6 +8,7 @@ namespace antares {
 		void Update(float dt) override;
 
 		void Draw(Renderer& renderer) override;
+		float GetRadius() override { return m_texture->GetSize().Length()*0.5f; }
 	public:
 		res_t<Texture> m_texture;
 

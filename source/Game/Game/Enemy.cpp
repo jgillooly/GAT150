@@ -8,6 +8,17 @@
 #include "SpaceGame.h"
 #include "Framework/Emitter.h"
 #include "Renderer/ParticleSystem.h"
+#include "Framework/Components/CircleCollisionComponent.h"
+#include "Framework/Components/RenderComponent.h"
+
+bool Enemy::Initialize() {
+	auto sComponent = GetComponent<antares::RenderComponent>();
+	auto cComponent = GetComponent<antares::CircleCollisionComponent>();
+	if (cComponent && sComponent) {
+		cComponent->m_radius = sComponent->GetRadius() * m_transform.scale;
+	}
+	return true;
+}
 
 void Enemy::Update(float dt) {
 	Actor::Update(dt);

@@ -9,6 +9,7 @@ public:
 		m_firetime = 2.0f;
 		m_firetimer = antares::randomf(0.0f, m_firetime);
 	}
+	bool Initialize() override;
 	void Update(float dt) override;
 	void OnCollision(Actor* other) override;
 private:

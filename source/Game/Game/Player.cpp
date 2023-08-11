@@ -9,6 +9,18 @@
 #include "Framework/Components/SpriteComponent.h"
 #include "Framework/Resource/ResourceManager.h"
 #include "Framework/Components/EnginePhysicsComponent.h"
+#include "Framework/Components/CircleCollisionComponent.h"
+
+bool Player::Initialize() {
+	Actor::Initialize();
+	m_pComponent = GetComponent<antares::EnginePhysicsComponent>();
+	auto sComponent = GetComponent<antares::RenderComponent>();
+	auto cComponent = GetComponent<antares::CircleCollisionComponent>();
+	if (cComponent && sComponent) {
+		cComponent->m_radius = sComponent->GetRadius() * m_transform.scale;
+	}
+	return true;
+}
 
 void Player::Update(float dt) {
 	Actor::Update(dt);
@@ -20,11 +32,14 @@ void Player::Update(float dt) {
 		std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
 		component->m_texture = antares::g_resMan.Get<antares::Texture>("Rocket.png", antares::g_renderer);
 		weapon->AddComponent(std::move(component));
+		auto eCComponent = std::make_unique <antares::CircleCollisionComponent>();
+		eCComponent->m_radius = 30.0f;
+		weapon->AddComponent(std::move(eCComponent));
+		weapon->Initialize();
 		m_scene->Add(std::move(weapon));
 	}
 
-	auto physicsComponent = GetComponent<antares::EnginePhysicsComponent>();
-	physicsComponent->Update(dt);
+	m_pComponent->Update(dt);
 
 	float rotate = 0;
 	if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) rotate = -1;
@@ -54,6 +69,7 @@ void Player::Update(float dt) {
 	if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_S)) thrust = -1;
 	antares::vec2 forward = antares::vec2{ 0, -1 }.Rotate(m_transform.rotation);
 	m_transform.position += forward * (m_boosting? m_boostSpeed : m_speed) *antares::g_time.getDeltaTime() * thrust;
+	//m_pComponent->ApplyForce(forward * (m_boosting ? m_boostSpeed : m_speed) * thrust);
 
 	antares::vec2 direction;
 	//m_transform.position += (direction.Rotate(m_transform.rotation) * m_speed * antares::g_time.getDeltaTime());
