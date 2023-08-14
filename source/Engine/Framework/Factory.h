@@ -14,8 +14,8 @@ namespace antares {
 	template <typename T>
 	class Creator : public CreatorBase {
 	public:
-		std::unique_ptr<T> Create() {
-			return std::make_unique<T>();
+		std::unique_ptr<class Object> Create() {
+			return std::make_unique<class Object>();
 		}
 	};
 
@@ -41,7 +41,7 @@ namespace antares {
 	inline std::unique_ptr<T> Factory::Create(const std::string& key) {
 		auto iter = m_registry.find(key);
 		if (iter != m_registry.end()) {
-			return std::unique_ptr<T>(iter->second->Create().release());
+			return std::unique_ptr<T>(dynamic_cast<T*>(iter->second->Create().release()));
 		}
 	}
 }
