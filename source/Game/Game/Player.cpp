@@ -30,7 +30,7 @@ void Player::Update(float dt) {
 		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, 0.0f, transform2);
 		weapon->m_tag = "PlayerBullet";
 		std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
-		component->m_texture = antares::g_resMan.Get<antares::Texture>("Rocket.png", antares::g_renderer);
+		component->m_texture = GET_RESOURCE(antares::Texture, "Rocket.png", antares::g_renderer);
 		weapon->AddComponent(std::move(component));
 		auto eCComponent = std::make_unique <antares::CircleCollisionComponent>();
 		eCComponent->m_radius = 30.0f;

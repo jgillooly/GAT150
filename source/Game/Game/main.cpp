@@ -63,7 +63,7 @@ void zero_ref(int& v) {
 
 int main(int argc, char* argv[]) {
 
-	
+	antares::Factory::Instance().Register<antares::SpriteComponent>("sprite");
 
 	INFO_LOG("Initialize Game");
 
@@ -71,6 +71,29 @@ int main(int argc, char* argv[]) {
 
 	antares::seedRandom((unsigned int)time(NULL));
 	antares::setFilePath("assets");
+
+
+	rapidjson::Document document;
+	antares::Json::Load("json.txt", document);
+	int i1;
+	antares::Json::Read(document, "integer1", i1);
+	std::cout << i1 << std::endl;
+	int i2;
+	antares::Json::Read(document, "integer2", i2);
+	std::cout << i2 << std::endl;
+	std::string str;
+	antares::Json::Read(document, "string", str);
+	std::cout << str << std::endl;
+	bool b;
+	antares::Json::Read(document, "boolean", b);
+	std::cout << b << std::endl;
+	float f;
+	antares::Json::Read(document, "float", f);
+	std::cout << f << std::endl;
+	antares::vec2 v2;
+	antares::Json::Read(document, "vector2", v2);
+	std::cout << v2 << std::endl;
+
 	vector<Star> stars;
 	antares::Renderer renderer;
 	antares::g_renderer.CreateWindow("window", 800, 600);
@@ -106,7 +129,7 @@ int main(int argc, char* argv[]) {
 	
 
 
-	shared_ptr<antares::Texture> texture = antares::g_resMan.Get<antares::Texture>("planet.jpg", antares::g_renderer);
+	shared_ptr<antares::Texture> texture = GET_RESOURCE(antares::Texture, "planet.jpg", antares::g_renderer);
 	//texture->Load("planet.jpg", antares::g_renderer);
 
 

@@ -2,9 +2,12 @@
 #include <map>
 #include <memory>
 #include "Resource.h"
+#include "Framework/Singleton.h"
+
+#define GET_RESOURCE(type, filename, ...) antares::ResourceManager::Instance().Get<type>(filename, __VA_ARGS__)
 
 namespace antares {
-	class ResourceManager {
+	class ResourceManager : public Singleton<ResourceManager> {
 	public:
 		template<typename T, typename ... TArgs>
 		res_t<T> Get(const std::string& filename, TArgs ... args);
@@ -21,5 +24,4 @@ namespace antares {
 
 		return resource;
 	}
-	extern ResourceManager g_resMan;
 }

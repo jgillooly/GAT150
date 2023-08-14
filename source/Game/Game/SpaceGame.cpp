@@ -11,7 +11,7 @@
 
 bool SpaceGame::Initialize() {	
 	// create font / text objects
-	m_font = antares::g_resMan.Get<antares::Font>("Quattrocento.ttf", 36);
+	m_font = GET_RESOURCE(antares::Font, "Quattrocento.ttf", 36);
 	m_scoreText = std::make_unique<antares::Text>(m_font);
 	m_scoreText->Create(antares::g_renderer, "SCORE: 0000", antares::Color{ 1, 1, 1, 1 });
 	
@@ -90,8 +90,9 @@ void SpaceGame::Uptdate(float dt) {
 		float speed = 100;
 		constexpr float turnRate = antares::Degrees2Radians(180.0f);
 		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform);
-		std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
-		component->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
+		//std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
+		auto component = antares::Factory::Instance().Create<antares::SpriteComponent>("sprite");
+		component->m_texture = GET_RESOURCE(antares::Texture, "Ship.png", antares::g_renderer);
 
 		//std::unique_ptr<antares::ModelRenderComponent> component = std::make_unique<antares::ModelRenderComponent>();
 		//component->m_model = antares::g_resMan.Get<antares::Model>("Diamond.txt");
@@ -122,7 +123,7 @@ void SpaceGame::Uptdate(float dt) {
 			antares::Transform t1{ {400, 300}, rotat, 2};
 			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(200.0f, 200.0f, t1);
 			std::unique_ptr<antares::SpriteComponent> component1 = std::make_unique<antares::SpriteComponent>();
-			component1->m_texture = antares::g_resMan.Get<antares::Texture>("Ship.png", antares::g_renderer);
+			component1->m_texture = GET_RESOURCE(antares::Texture, "Ship.png", antares::g_renderer);
 
 			auto eCComponent = std::make_unique <antares::CircleCollisionComponent>();
 			eCComponent->m_radius = 30.0f;

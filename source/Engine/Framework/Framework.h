@@ -14,3 +14,5 @@
 
 //Resources
 #include "Resource/ResourceManager.h"
+
+#include "Factory.h"
