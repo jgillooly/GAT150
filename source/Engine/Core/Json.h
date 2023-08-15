@@ -3,6 +3,9 @@
 #include <string>
 #include "Vector2.h"
 
+#define READ_DATA(value, data) antares::Json::Read(value, #data, data);
+#define READ_DATA_REQUIRED(value, data) antares::Json::Read(value, #data, data, true);
+
 namespace antares {
 	class Json
 	{

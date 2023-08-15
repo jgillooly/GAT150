@@ -1,7 +1,8 @@
 #include "Actor.h"
 #include "Components/RenderComponent.h"
+#include "rapidjson/include/rapidjson/rapidjson.h"
 namespace antares {
-
+	CLASS_DEFINITION(Actor)
 	bool Actor::Initialize() {
 		for (auto& component : m_components) {
 			component->Initialize();
@@ -36,5 +37,10 @@ namespace antares {
 	void Actor::AddComponent(std::unique_ptr<Component> component) {
 		component->m_owner = this;
 		m_components.push_back(std::move(component));
+	}
+
+	bool Actor::Read(const rapidjson::Value& value) {
+
+		return true;
 	}
 }

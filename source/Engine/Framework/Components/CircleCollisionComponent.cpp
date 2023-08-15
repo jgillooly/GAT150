@@ -1,6 +1,9 @@
 #include "CircleCollisionComponent.h"
 #include "Framework/Actor.h"
+
 namespace antares {
+    CLASS_DEFINITION(CircleCollisionComponent)
+
     void CircleCollisionComponent::Update(float dt) {
 
     }

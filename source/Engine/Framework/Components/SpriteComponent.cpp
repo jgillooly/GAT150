@@ -3,6 +3,8 @@
 #include "Framework/Actor.h"
 
 namespace antares {
+	CLASS_DEFINITION(SpriteComponent)
+
 	void SpriteComponent::Update(float dt) {
 
 	}

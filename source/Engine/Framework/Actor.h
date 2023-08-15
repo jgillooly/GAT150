@@ -10,6 +10,7 @@
 namespace antares {
 class Actor : public Object {
 public:
+	CLASS_DECLARATION(Actor)
 	Actor() = default;
 	Actor(const antares::Transform& transform, std::shared_ptr<Model> model) : m_transform{transform} {}
 	Actor(const antares::Transform& transform) :

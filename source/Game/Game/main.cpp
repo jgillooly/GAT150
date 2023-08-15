@@ -63,7 +63,7 @@ void zero_ref(int& v) {
 
 int main(int argc, char* argv[]) {
 
-	antares::Factory::Instance().Register<antares::SpriteComponent>("sprite");
+	antares::Factory::Instance().Register<antares::SpriteComponent>("SpriteComponent");
 
 	INFO_LOG("Initialize Game");
 

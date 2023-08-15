@@ -91,7 +91,8 @@ void SpaceGame::Uptdate(float dt) {
 		constexpr float turnRate = antares::Degrees2Radians(180.0f);
 		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform);
 		//std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
-		std::unique_ptr<antares::SpriteComponent> component = antares::Factory::Instance().Create<antares::SpriteComponent>("sprite");
+		auto component = CREATE_CLASS(SpriteComponent);
+		component->str = "help";
 		component->m_texture = GET_RESOURCE(antares::Texture, "Ship.png", antares::g_renderer);
 
 		//std::unique_ptr<antares::ModelRenderComponent> component = std::make_unique<antares::ModelRenderComponent>();
