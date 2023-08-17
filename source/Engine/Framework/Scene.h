@@ -2,6 +2,7 @@
 #include <list>
 #include "Actor.h"
 #include <memory>
+#include <string>
 
 
 namespace antares {
@@ -14,8 +15,13 @@ namespace antares {
 		void Update(float dt);
 		void Draw(Renderer& renderer);
 
+		bool Initialize();
+
 		void Add(std::unique_ptr<Actor> actor);
 		void RemoveAll();
+
+		bool Load(const std::string& filename);
+		void Read(const json_t& value);
 
 		template<typename T>
 		T* GetActor();

@@ -6,8 +6,9 @@
 namespace antares {
 	class SpriteComponent : public RenderComponent {
 	public:
-		CLASS_DECLARATION(SpriteComponent)
+		CLASS_DECLARATION(SpriteComponent);
 		// Inherited via RenderComponent
+		bool Initialize() override;
 		void Update(float dt) override;
 
 		void Draw(Renderer& renderer) override;
@@ -15,6 +16,6 @@ namespace antares {
 
 	public:
 		res_t<Texture> m_texture;
-		std::string str = "debug";
+		std::string textureName = "";
 	};
 }

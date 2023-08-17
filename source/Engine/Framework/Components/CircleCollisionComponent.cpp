@@ -9,7 +9,11 @@ namespace antares {
     }
 
     bool CircleCollisionComponent::CheckCollision(CollisionComponent* other) {
-        float distance = m_owner->m_transform.position.Distance(other->m_owner->m_transform.position);
+        float distance = m_owner->transform.position.Distance(other->m_owner->transform.position);
         return (distance <= m_radius + other->m_radius);
+    }
+
+    void CircleCollisionComponent::Read(const json_t& value) {
+
     }
 }

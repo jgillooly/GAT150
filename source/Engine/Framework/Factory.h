@@ -5,8 +5,10 @@
 #include "Object.h"
 #include "Singleton.h"
 #include "Core/Logger.h"
+#include <iostream>
 
 #define CREATE_CLASS(classname) antares::Factory::Instance().Create<antares::classname>(#classname);
+#define CREATE_CLASS_BASE(classbase, classname) antares::Factory::Instance().Create<antares::classbase>(classname);
 
 namespace antares {
 	class CreatorBase {
@@ -19,7 +21,7 @@ namespace antares {
 	class Creator : public CreatorBase {
 	public:
 		std::unique_ptr<class Object> Create() {
-			return std::make_unique<class Object>();
+			return std::make_unique<T>();
 		}
 	};
 
@@ -35,14 +37,14 @@ namespace antares {
 	private:
 		std::map<std::string, std::unique_ptr<antares::CreatorBase>> m_registry;
 	protected:
-		Factory() = default;
+		Factory() { std::cout << "AAAAAAA" << std::endl; }
 	};
 
 
 	template<typename T>
 	inline void Factory::Register(const std::string& key) {
 		m_registry[key] = std::make_unique<Creator<T>>();
-		INFO_LOG("Registered in Factory")
+		std::cout << "Registered in Factory" << std::endl;
 	}
 
 	template<typename T>

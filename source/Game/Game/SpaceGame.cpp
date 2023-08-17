@@ -35,6 +35,8 @@ bool SpaceGame::Initialize() {
 	antares::g_audioSystem.AddAudio("music", "Music.wav");
 
 	m_scene = std::make_unique<antares::Scene>();
+	m_scene->Load("scene.json");
+	m_scene->Initialize();
 	m_state = SpaceGame::Title;
 	antares::g_particleSystem = antares::ParticleSystem(10000);
 
@@ -92,7 +94,6 @@ void SpaceGame::Uptdate(float dt) {
 		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform);
 		//std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
 		auto component = CREATE_CLASS(SpriteComponent);
-		component->str = "help";
 		component->m_texture = GET_RESOURCE(antares::Texture, "Ship.png", antares::g_renderer);
 
 		//std::unique_ptr<antares::ModelRenderComponent> component = std::make_unique<antares::ModelRenderComponent>();
@@ -106,9 +107,9 @@ void SpaceGame::Uptdate(float dt) {
 		cComponent->m_radius = 30.0f;
 		player->AddComponent(std::move(cComponent));
 
-		player->m_tag = "Player";
+		player->tag = "Player";
 		player->m_game = this;
-		player->m_transform.scale = 0.5f;
+		player->transform.scale = 0.5f;
 		player->Initialize();
 		m_scene->Add(std::move(player));
 		m_state = eState::Game;
@@ -129,7 +130,7 @@ void SpaceGame::Uptdate(float dt) {
 			auto eCComponent = std::make_unique <antares::CircleCollisionComponent>();
 			eCComponent->m_radius = 30.0f;
 			enemy->AddComponent(std::move(eCComponent));
-			enemy->m_tag = "Enemy";
+			enemy->tag = "Enemy";
 			enemy->m_game = this;
 			enemy->AddComponent(std::move(component1));
 			enemy->Initialize();

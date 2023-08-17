@@ -12,9 +12,9 @@ class Actor : public Object {
 public:
 	CLASS_DECLARATION(Actor)
 	Actor() = default;
-	Actor(const antares::Transform& transform, std::shared_ptr<Model> model) : m_transform{transform} {}
+	Actor(const antares::Transform& transform, std::shared_ptr<Model> model) : transform{transform} {}
 	Actor(const antares::Transform& transform) :
-		m_transform{ transform } {
+		transform{ transform } {
 	}
 
 	virtual bool Initialize() override;
@@ -33,23 +33,23 @@ public:
 	Game* m_game = nullptr;
 	friend class Scene;
 
-	antares::Transform m_transform;
+	antares::Transform transform;
 
-	std::string m_tag;
+	std::string tag;
 	inline bool isDestroyed() { return m_destroyed; }
 	friend class SpaceGame;
 	template<typename T>
 	T* GetComponent();
 protected:
-	std::vector<std::shared_ptr<Component>> m_components;
+	std::vector<std::shared_ptr<Component>> components;
 	//antares::Model m_model;
 
 	bool m_destroyed = false;
-	float m_lifespan = -1.0f;
+	float lifespan = -1.0f;
 };
 template<typename T>
 inline T* Actor::GetComponent() {
-	for (auto& component : m_components) {
+	for (auto& component : components) {
 		T* result = dynamic_cast<T*>(component.get());
 		if (result) return result;
 	}

@@ -26,6 +26,4 @@ namespace antares {
 
 		return true;
 	}
-
-	Logger g_logger(LogLevel::Info, &std::cout, "Log.txt");
 }

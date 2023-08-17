@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector2.h"
 #include "Math/Matrix33.h"
+#include "Json.h"
 
 namespace antares {
 	class Transform {
@@ -20,5 +21,8 @@ namespace antares {
 
 			return ( mt * ms * mr );
 		}
+
+
+		void Read(const json_t& value);
 	};
 }
