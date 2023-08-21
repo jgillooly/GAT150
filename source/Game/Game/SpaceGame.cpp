@@ -58,6 +58,8 @@ void SpaceGame::Uptdate(float dt) {
 	{
 		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)) {
 			m_state = eState::StartGame;
+			//auto actor = m_scene->GetActor<antares::Actor>("Background");
+			//if(actor) actor->active = false;
 		}
 		
 		if (antares::g_inputSystem.GetMouseButtonDown(0)) {

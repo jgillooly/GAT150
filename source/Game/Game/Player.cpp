@@ -25,7 +25,7 @@ bool Player::Initialize() {
 void Player::Update(float dt) {
 	Actor::Update(dt);
 
-	//if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
+	if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 	//	antares::Transform transform2 {transform.position, transform.rotation, 1};
 	//	std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, 0.0f, transform2);
 	//	weapon->tag = "PlayerBullet";
@@ -37,7 +37,13 @@ void Player::Update(float dt) {
 	//	weapon->AddComponent(std::move(eCComponent));
 	//	weapon->Initialize();
 	//	m_scene->Add(std::move(weapon));
-	//}
+		auto weapon = INSTANTIATE(Weapon, "Rocket");
+		weapon->transform = { transform.position, transform.rotation, 1 };
+		weapon->tag = "PlayerBullet";
+		weapon->Initialize();
+		m_scene->Add(std::move(weapon));
+
+	}
 
 	m_pComponent->Update(dt);
 

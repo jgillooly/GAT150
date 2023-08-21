@@ -12,6 +12,7 @@
 #include "Framework/Components/RenderComponent.h"
 
 bool Enemy::Initialize() {
+	Actor::Initialize();
 	auto sComponent = GetComponent<antares::RenderComponent>();
 	auto cComponent = GetComponent<antares::CircleCollisionComponent>();
 	if (cComponent && sComponent) {
@@ -59,22 +60,22 @@ void Enemy::OnCollision(Actor* other) {
 	if (other->tag == "PlayerBullet" && !m_destroyed) {
 		m_destroyed = true;
 		m_game->AddPoints(50);
-		//antares::EmitterData data;
-		//data.burst = true;
-		//data.burstCount = 100;
-		//data.spawnRate = 200;
-		//data.angle = 0.0f;
-		//data.angleRange = antares::Pi;
-		//data.lifetimeMin = 0.5f;
-		//data.lifetimeMax = 1.5f;
-		//data.speedMin = 50;
-		//data.speedMax = 250;
-		//data.damping = 0.5f;
-		//data.color = antares::Color{ 1.0f, 0.0f, 0.0f, 1.0f };
-		//antares::Transform transform{ m_transform.position, 0.0f, 1.0f };
-		//std::unique_ptr<antares::Emitter> emitter = std::make_unique<antares::Emitter>(transform, data);
-		//emitter->m_lifespan = 1.0f;
-		//emitter->m_tag = "Emitter";
-		//m_scene->Add(std::move(emitter));
+		antares::EmitterData data;
+		data.burst = true;
+		data.burstCount = 100;
+		data.spawnRate = 200;
+		data.angle = 0.0f;
+		data.angleRange = antares::Pi;
+		data.lifetimeMin = 0.5f;
+		data.lifetimeMax = 1.5f;
+		data.speedMin = 50;
+		data.speedMax = 250;
+		data.damping = 0.5f;
+		data.color = antares::Color{ 1.0f, 0.0f, 0.0f, 1.0f };
+		antares::Transform transform1{ transform.position, 0.0f, 1.0f };
+		std::unique_ptr<antares::Emitter> emitter = std::make_unique<antares::Emitter>(transform1, data);
+		emitter->lifespan = 1.0f;
+		emitter->tag = "Emitter";
+		m_scene->Add(std::move(emitter));
 	}
 }

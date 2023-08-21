@@ -5,6 +5,7 @@
 namespace antares {
 	class Weapon : public Actor {
 	public:
+		CLASS_DECLARATION(Weapon);
 		/*
 		Weapon(float speed, float turnRate, const antares::Transform& transform) :
 			Actor{ transform },
@@ -12,8 +13,6 @@ namespace antares {
 			lifespan = 2.0;
 		}
 		*/
-
-		void Read(const json_t& value);
 
 		void Update(float dt) override;
 

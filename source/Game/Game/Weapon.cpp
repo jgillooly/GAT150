@@ -2,7 +2,9 @@
 #include "Framework/Components/RenderComponent.h"
 #include "Framework/Components/CircleCollisionComponent.h"
 namespace antares {
+	CLASS_DEFINITION(Weapon);
 	void Weapon::Read(const json_t& value) {
+		Actor::Read(value);
 		READ_DATA(value, speed);
 	}
 	void Weapon::Update(float dt) {
@@ -13,6 +15,7 @@ namespace antares {
 	}
 
 	bool Weapon::Initialize() {
+		Actor::Initialize();
 		auto sComponent = GetComponent<antares::RenderComponent>();
 		auto cComponent = GetComponent<antares::CircleCollisionComponent>();
 		if (cComponent && sComponent) {

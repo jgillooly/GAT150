@@ -7,14 +7,14 @@ namespace antares {
 		//update & remove destroyed actors
 		auto iter = m_actors.begin();
 		while (iter != m_actors.end()) {
-			(*iter)->Update(dt);
-			//(((*iter)->m_destroyed) ? iter = m_actors.erase(iter) : iter++);
-			if ((*iter)->m_destroyed) {
-				iter = m_actors.erase(iter);
-			}
-			else {
-				iter++;
-			}
+			if ((*iter)->active) (*iter)->Update(dt);
+			(((*iter)->m_destroyed) ? iter = m_actors.erase(iter) : iter++);
+			//if ((*iter)->m_destroyed) {
+			//	iter = m_actors.erase(iter);
+			//}
+			//else {
+			//	iter++;
+			//}
 			
 		}
 		//check collisions
@@ -38,7 +38,7 @@ namespace antares {
 
 	void Scene::Draw(Renderer& renderer) {
 		for (auto& actor : m_actors) {
-			actor->Draw(renderer);
+			if (actor->active) actor->Draw(renderer);
 		}
 	}
 
@@ -55,8 +55,16 @@ namespace antares {
 		m_actors.push_back(std::move(actor));
 	}
 
-	void Scene::RemoveAll() {
-		m_actors.clear();
+	void Scene::RemoveAll(bool force) {
+		auto iter = m_actors.begin();
+		while (iter != m_actors.end()) {
+			if (!(*iter)->persistent || force) {
+				iter = m_actors.erase(iter);
+			}
+			else {
+				iter++;
+			}
+		}
 	}
 	bool Scene::Load(const std::string& filename) {
 		rapidjson::Document document;
@@ -72,10 +80,17 @@ namespace antares {
 			for (auto& actorValue : GET_DATA(value, actors).GetArray()) {
 				std::string type;
 				READ_DATA(actorValue, type);
-				auto component = CREATE_CLASS_BASE(Actor, type);
-				component->Read(actorValue);
+				auto actor = CREATE_CLASS_BASE(Actor, type);
+				actor->Read(actorValue);
+				if (actor->prototype) {
+					std::string name = actor->name;
+					Factory::Instance().RegisterPrototype(name, std::move(actor));
+				}
+				else {
+					Add(std::move(actor));
+				}
 
-				Add(std::move(component));
+				
 			}
 		}
 	}

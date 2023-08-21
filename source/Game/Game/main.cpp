@@ -13,6 +13,7 @@
 #include <array>
 #include <map>
 #include "Framework/Framework.h"
+#include "Physics/PhysicsSystem.h"
 
 using namespace std;
 
@@ -70,6 +71,7 @@ int main(int argc, char* argv[]) {
 
 	antares::MemoryTracker::Initialize();
 	antares::Factory::Instance();
+	antares::PhysicsSystem::Instance().Initialize();
 	antares::seedRandom((unsigned int)time(NULL));
 	antares::setFilePath("assets");
 
@@ -143,18 +145,18 @@ int main(int argc, char* argv[]) {
 		antares::g_renderer.BeginFrame();
 		antares::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
 		//text->Draw(antares::g_renderer, 400, 300);
-		//renderer.SetColor(255, 255, 255, SDL_ALPHA_OPAQUE);
-		//for (auto& point : stars) {
-		//	int r = antares::random(256);
-		//	int g = antares::random(256);
-		//	int b = antares::random(256);
-		//	antares::g_renderer.SetColor(255, 255, 255, SDL_ALPHA_OPAQUE);
-		//	point.Update();
-		//	if (point.m_position.x > antares::g_renderer.GetWidth()) point.m_position.x = 0;
-		//	if (point.m_position.y > antares::g_renderer.GetHeight()) point.m_position.y = 0;
+		renderer.SetColor(255, 255, 255, SDL_ALPHA_OPAQUE);
+		for (auto& point : stars) {
+			int r = antares::random(256);
+			int g = antares::random(256);
+			int b = antares::random(256);
+			antares::g_renderer.SetColor(255, 255, 255, SDL_ALPHA_OPAQUE);
+			point.Update();
+			if (point.m_position.x > antares::g_renderer.GetWidth()) point.m_position.x = 0;
+			if (point.m_position.y > antares::g_renderer.GetHeight()) point.m_position.y = 0;
 
-		//	antares::g_renderer.DrawPoint(point.m_position.x, point.m_position.y);
-		//}
+			antares::g_renderer.DrawPoint(point.m_position.x, point.m_position.y);
+		}
 		//scene.Update(antares::g_time.getDeltaTime());
 		//scene.Draw(antares::g_renderer);
 		//enemy.Update(antares::g_time.getDeltaTime());

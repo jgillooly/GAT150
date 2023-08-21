@@ -16,6 +16,7 @@ public:
 	Actor(const antares::Transform& transform) :
 		transform{ transform } {
 	}
+	Actor(const Actor& other);
 
 	virtual bool Initialize() override;
 	virtual void OnDestroy() override;
@@ -40,8 +41,11 @@ public:
 	friend class SpaceGame;
 	template<typename T>
 	T* GetComponent();
+	bool persistent = false;
+	bool prototype = false;
+
 protected:
-	std::vector<std::shared_ptr<Component>> components;
+	std::vector<std::unique_ptr<Component>> components;
 	//antares::Model m_model;
 
 	bool m_destroyed = false;

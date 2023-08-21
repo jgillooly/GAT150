@@ -9,6 +9,7 @@
 
 #define CREATE_CLASS(classname) antares::Factory::Instance().Create<antares::classname>(#classname);
 #define CREATE_CLASS_BASE(classbase, classname) antares::Factory::Instance().Create<antares::classbase>(classname);
+#define INSTANTIATE(classbase, classname) antares::Factory::Instance().Create<antares::classbase>(classname);
 
 namespace antares {
 	class CreatorBase {
@@ -25,10 +26,26 @@ namespace antares {
 		}
 	};
 
+	template <typename T>
+	class PrototypeCreator : public CreatorBase {
+	public:
+		PrototypeCreator(std::unique_ptr<T> prototype) : prototype { std::move(prototype) } {}
+		std::unique_ptr<class Object> Create() {
+			return prototype->Clone();
+		}
+	private:
+		std::unique_ptr<T> prototype;
+	};
+
 	class Factory : public Singleton<Factory> {
 	public:
 		template <typename T>
 		void Register(const std::string& key);
+
+		template <typename T>
+		void RegisterPrototype(const std::string& key, std::unique_ptr<T> prototype);
+
+
 
 		template <typename T>
 		std::unique_ptr<T> Create(const std::string& key);
@@ -45,6 +62,12 @@ namespace antares {
 	inline void Factory::Register(const std::string& key) {
 		m_registry[key] = std::make_unique<Creator<T>>();
 		std::cout << "Registered in Factory" << std::endl;
+	}
+
+	template<typename T>
+	inline void Factory::RegisterPrototype(const std::string& key, std::unique_ptr<T> prototype) {
+		m_registry[key] = std::make_unique<PrototypeCreator<T>>(std::move(prototype));
+		std::cout << "Prototype Registered in Factory" << std::endl;
 	}
 
 	template<typename T>
