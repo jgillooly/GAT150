@@ -10,6 +10,7 @@
 #include "Framework/Resource/ResourceManager.h"
 #include "Framework/Components/EnginePhysicsComponent.h"
 #include "Framework/Components/CircleCollisionComponent.h"
+#include "Framework/Event/EventManager.h"
 
 bool Player::Initialize() {
 	Actor::Initialize();
@@ -86,8 +87,9 @@ void Player::Update(float dt) {
 void Player::OnCollision(Actor* other) {
 	if (other->tag == "EnemyBullet" && !other->isDestroyed() && !m_destroyed) {
 		std::cout << "Boom";
-		m_game->SetLives(m_game->GetLives() - 1);
-		dynamic_cast<SpaceGame*>(m_game)->SetState(SpaceGame::PlayerDead);
+		//m_game->SetLives(m_game->GetLives() - 1);
+		//dynamic_cast<SpaceGame*>(m_game)->SetState(SpaceGame::PlayerDead);
+		antares::EventManager::Instance().DispatchEvent("OnPlayerDead", 0);
 		m_destroyed = true;
 		if (m_destroyed) {
 			antares::EmitterData data;

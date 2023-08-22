@@ -212,5 +212,6 @@ void SpaceGame::AddPoints(const antares::Event& event) {
 }
 
 void SpaceGame::OnPlayerDeath(const antares::Event& event) {
+	m_lives--;
 	SetState(eState::PlayerDead);
 }
