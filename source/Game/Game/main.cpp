@@ -14,6 +14,7 @@
 #include <map>
 #include "Framework/Framework.h"
 #include "Physics/PhysicsSystem.h"
+#include <functional>
 
 using namespace std;
 
@@ -61,8 +62,43 @@ void zero_ref(int& v) {
 	v = 0;
 }
 
+void print(int i) {
+	cout << i << endl;
+}
+
+int add(int i1, int i2) { return i1 + i2; }
+int sub(int i1, int i2) { return i1 - i2; }
+
+class A {
+public:
+	int add(int i1, int i2) { return i1 + i2; }
+	int sub(int i1, int i2) { return i1 - i2; }
+};
+
+union Data {
+	int i;
+	bool b;
+	char str[6];
+};
 
 int main(int argc, char* argv[]) {
+
+	Data data;
+
+
+	void (*func_ptr)(int)= &print;
+	func_ptr(5);
+
+	int(*op_ptr)(int, int);
+	op_ptr = &add;
+
+	std::function<int(int, int)> op;
+
+	op = add;
+	A a;
+
+	op = std::bind(&A::add, &a, std::placeholders::_1, std::placeholders::_2);
+
 
 	
 	{ if (antares::Logger::Instance().Log(antares::LogLevel::Info, "C:\\Users\\Joshua\\source\\repos\\GAT150\\source\\Game\\Game\\main.cpp", 67)) {

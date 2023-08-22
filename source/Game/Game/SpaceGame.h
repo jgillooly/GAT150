@@ -2,7 +2,9 @@
 #include "Framework/Game.h"
 #include "Renderer/Text.h"
 #include "Renderer/ParticleSystem.h"
-class SpaceGame : public antares::Game {
+#include "Framework/Event/EventManager.h"
+
+class SpaceGame : public antares::Game, antares::IEventListener {
 public:
 	enum eState {
 		Title,
@@ -23,6 +25,7 @@ public:
 	virtual void Draw(antares::Renderer& renderer) override;
 
 	void SetState(eState state) { m_state = state; }
+	void AddPoints(const antares::Event& event);
 
 private:
 	eState m_state;

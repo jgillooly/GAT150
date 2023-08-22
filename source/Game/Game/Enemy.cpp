@@ -58,8 +58,9 @@ void Enemy::Update(float dt) {
 
 void Enemy::OnCollision(Actor* other) {
 	if (other->tag == "PlayerBullet" && !m_destroyed) {
+		antares::EventManager::Instance().DispatchEvent("AddPoints", 100);
 		m_destroyed = true;
-		m_game->AddPoints(50);
+		//m_game->AddPoints(50);
 		antares::EmitterData data;
 		data.burst = true;
 		data.burstCount = 100;

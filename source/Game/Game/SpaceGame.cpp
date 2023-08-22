@@ -9,6 +9,7 @@
 #include "Pickup.h"
 #include "Framework/Framework.h"
 
+
 bool SpaceGame::Initialize() {	
 	// create font / text objects
 	m_font = GET_RESOURCE(antares::Font, "Quattrocento.ttf", 36);
@@ -45,6 +46,8 @@ bool SpaceGame::Initialize() {
 	m_HSText->Create(antares::g_renderer, "High Score: " + HSString, antares::Color{ 1, 1, 1, 1 });
 	highscore = std::stoi(HSString);
 	antares::g_audioSystem.PlayLoop("music");
+
+	antares::EventManager::Instance().Subscribe("AddPoints", this, std::bind(&SpaceGame::AddPoints, this, std::placeholders::_1));
 
 	return true;
 }
@@ -200,4 +203,9 @@ void SpaceGame::Draw(antares::Renderer& renderer) {
 	}
 	m_scene->Draw(renderer);
 	antares::g_particleSystem.Draw(renderer);
+}
+
+void SpaceGame::AddPoints(const antares::Event& event) {
+	m_score += std::get<int>(event.data);
+
 }

@@ -11,6 +11,9 @@
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{81058260-cb22-40a7-a6a9-9ca167a28064}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Event">
+      <UniqueIdentifier>{1512c411-25ff-4b13-86fc-42d16c5e6635}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -36,6 +39,12 @@
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\Event.cpp">
+      <Filter>Source Files\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event\EventManager.cpp">
+      <Filter>Source Files\Event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +101,12 @@
     </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\Event.h">
+      <Filter>Source Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event\EventManager.h">
+      <Filter>Source Files\Event</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
