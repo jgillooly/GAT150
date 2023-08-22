@@ -26,6 +26,7 @@ public:
 
 	void SetState(eState state) { m_state = state; }
 	void AddPoints(const antares::Event& event);
+	void OnPlayerDeath(const antares::Event& event);
 
 private:
 	eState m_state;

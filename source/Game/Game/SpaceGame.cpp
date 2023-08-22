@@ -48,6 +48,7 @@ bool SpaceGame::Initialize() {
 	antares::g_audioSystem.PlayLoop("music");
 
 	antares::EventManager::Instance().Subscribe("AddPoints", this, std::bind(&SpaceGame::AddPoints, this, std::placeholders::_1));
+	antares::EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&SpaceGame::OnPlayerDeath, this, std::placeholders::_1));
 
 	return true;
 }
@@ -208,4 +209,8 @@ void SpaceGame::Draw(antares::Renderer& renderer) {
 void SpaceGame::AddPoints(const antares::Event& event) {
 	m_score += std::get<int>(event.data);
 
+}
+
+void SpaceGame::OnPlayerDeath(const antares::Event& event) {
+	SetState(eState::PlayerDead);
 }
