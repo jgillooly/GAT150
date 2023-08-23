@@ -8,5 +8,8 @@ namespace antares {
 		// Inherited via PhysicsComponent
 		virtual void Update(float dt) override;
 		virtual void ApplyForce(const vec2& force) override;
+
+		// Inherited via PhysicsComponent
+		void ApplyTorque(float torque) override;
 	};
 }

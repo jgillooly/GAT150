@@ -124,23 +124,23 @@ void SpaceGame::Uptdate(float dt) {
 		//m_spawnTimer += dt;
 		if (m_spawnTimer >= m_spawnTime) {
 			m_spawnTimer = 0;
-			int specialRoll = antares::random(1, 100);
-			bool isSpecial = specialRoll <= 50;
-			if (isSpecial) std::cout << "Special Spawned" << std::endl;
-			float rotat = antares::randomf(antares::TwoPi);
-			antares::Transform t1{ {400, 300}, rotat, 2};
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(200.0f, 200.0f, t1);
-			std::unique_ptr<antares::SpriteComponent> component1 = std::make_unique<antares::SpriteComponent>();
-			component1->m_texture = GET_RESOURCE(antares::Texture, "Ship.png", antares::g_renderer);
+			//int specialRoll = antares::random(1, 100);
+			//bool isSpecial = specialRoll <= 50;
+			//if (isSpecial) std::cout << "Special Spawned" << std::endl;
+			//float rotat = antares::randomf(antares::TwoPi);
+			//antares::Transform t1{ {400, 300}, rotat, 2};
+			////std::unique_ptr<antares::Enemy> enemy = std::make_unique<Enemy>(200.0f, 200.0f, t1);
+			//std::unique_ptr<antares::SpriteComponent> component1 = std::make_unique<antares::SpriteComponent>();
+			//component1->m_texture = GET_RESOURCE(antares::Texture, "Ship.png", antares::g_renderer);
 
-			auto eCComponent = std::make_unique <antares::CircleCollisionComponent>();
-			eCComponent->m_radius = 30.0f;
-			enemy->AddComponent(std::move(eCComponent));
-			enemy->tag = "Enemy";
-			enemy->m_game = this;
-			enemy->AddComponent(std::move(component1));
-			enemy->Initialize();
-			m_scene->Add(std::move(enemy));
+			//auto eCComponent = std::make_unique <antares::CircleCollisionComponent>();
+			//eCComponent->m_radius = 30.0f;
+			//enemy->AddComponent(std::move(eCComponent));
+			//enemy->tag = "Enemy";
+			//enemy->m_game = this;
+			//enemy->AddComponent(std::move(component1));
+			//enemy->Initialize();
+			//m_scene->Add(std::move(enemy));
 		}
 		if (m_score >= m_milestone + 200) {
  			//int x = antares::random(100, antares::g_renderer.GetWidth() - 100);

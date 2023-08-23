@@ -136,6 +136,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Componenets\TextRenderComponent.cpp" />
+    <ClCompile Include="Components\Box2dCollisionComponent.cpp" />
+    <ClCompile Include="Components\Box2dPhysicsComponent.cpp" />
     <ClCompile Include="Components\CircleCollisionComponent.cpp" />
     <ClCompile Include="Components\EnginePhysicsComponent.cpp" />
     <ClCompile Include="Components\ModelRenderComponent.cpp" />
@@ -148,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Componenets\TextRenderComponent.h" />
+    <ClInclude Include="Components\Box2dCollisionComponent.h" />
+    <ClInclude Include="Components\Box2dPhysicsComponent.h" />
     <ClInclude Include="Components\CircleCollisionComponent.h" />
     <ClInclude Include="Components\CollisionComponent.h" />
     <ClInclude Include="Components\Component.h" />

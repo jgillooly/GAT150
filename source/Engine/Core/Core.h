@@ -1,9 +1,9 @@
 #include "Logger.h"
 #include "FileIO.h"
-#include "Memory.h"
 #include "Random.h"
 #include "Time.h"
 #include "Json.h"
+#include "Memory.h"
 
 //MATH
 #include "Vector2.h"

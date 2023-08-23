@@ -11,6 +11,8 @@
 #include "Components/ModelRenderComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Components/CircleCollisionComponent.h"
+#include "Components/Box2dCollisionComponent.h"
+#include "Components/Box2dPhysicsComponent.h"
 
 //Resources
 #include "Resource/ResourceManager.h"

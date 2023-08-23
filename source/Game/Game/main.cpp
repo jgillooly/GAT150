@@ -162,6 +162,7 @@ int main(int argc, char* argv[]) {
 		antares::g_audioSystem.Update();
 		antares::g_time.Tick();
 		antares::g_inputSystem.Update();
+		antares::PhysicsSystem::Instance().Update(antares::g_time.getDeltaTime());
 		game->Uptdate(antares::g_time.getDeltaTime());
 		//get inputs
 		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_ESCAPE)) {

@@ -1,6 +1,9 @@
 #pragma once
 #include "Framework/Actor.h"
 #include <Renderer/Model.h>
+#include "Framework/Components/PhysicsComponent.h"
+
+namespace antares {
 class Enemy : public antares::Actor {
 public:
 	Enemy(float speed, float turnRate, const antares::Transform& transform) :
@@ -16,7 +19,9 @@ private:
 	bool m_special = false;
 	float m_speed = 0;
 	float m_turnRate = 0;
-	
+
 	float m_firetime = 0;
 	float m_firetimer = 0;
+	antares::PhysicsComponent* m_physicsComponent;
 };
+}

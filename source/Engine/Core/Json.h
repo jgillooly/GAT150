@@ -1,6 +1,5 @@
 #pragma once
-#include <rapidjson/include/rapidjson/rapidjson.h>
-#include "rapidjson/include/rapidjson/document.h"
+#include <rapidjson/include/rapidjson/document.h>
 
 #include <string>
 #include "Vector2.h"
@@ -9,6 +8,8 @@
 #define READ_DATA_REQUIRED(value, data) antares::Json::Read(value, #data, data, true)
 #define HAS_DATA(value, data) value.HasMember(#data)
 #define GET_DATA(value, data) value[#data]
+#define READ_NAME_DATA(value, name, data) antares::Json::Read(value, name, data)
+#define READ_NAME_DATA_REQUIRED(value, name, data) antares::Json::Read(value, name, data, true)
 
 
 namespace antares {

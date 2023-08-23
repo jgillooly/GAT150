@@ -51,7 +51,8 @@ void Player::Update(float dt) {
 	float rotate = 0;
 	if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) rotate = -1;
 	if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_D)) rotate = 1;
-	transform.rotation += rotate * m_turnRate * antares::g_time.getDeltaTime();
+	//transform.rotation += rotate * m_turnRate * antares::g_time.getDeltaTime();
+	m_pComponent->ApplyTorque(rotate * m_turnRate);
 
 	if (m_boosting) {
 		m_boostActiveTimer += dt;

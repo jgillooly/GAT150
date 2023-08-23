@@ -1,8 +1,13 @@
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Actor.cpp
+C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Componenets\TextRenderComponent.cpp
+C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\Box2dCollisionComponent.cpp
+C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\Box2dPhysicsComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\CircleCollisionComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\EnginePhysicsComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\ModelRenderComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\SpriteComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Emitter.cpp
+C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Event\Event.cpp
+C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Event\EventManager.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Object.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Scene.cpp

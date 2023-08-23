@@ -5,6 +5,9 @@
 #include <list>
 #include <functional>
 
+#define EVENT_SUBSCRIBE(id, function)	antares::EventManager::Instance().Subscribe(id, this, std::bind(&function, this, std::placeholders::_1));
+#define EVENT_UNSUBSCRIBE(id)			antares::EventManager::Instance().Unsubscribe(id, this);
+
 namespace antares {
 	class IEventListener {
 		//
