@@ -11,6 +11,7 @@
 #include "Framework/Components/CircleCollisionComponent.h"
 #include "Framework/Components/RenderComponent.h"
 namespace antares {
+	CLASS_DEFINITION(Enemy)
 	bool Enemy::Initialize() {
 		Actor::Initialize();
 		m_physicsComponent = GetComponent<antares::PhysicsComponent>();
@@ -34,9 +35,9 @@ namespace antares {
 		}
 
 		antares::vec2 forward = antares::vec2{ 0, -1 }.Rotate(transform.rotation);
-		transform.position += forward * m_speed * antares::g_time.getDeltaTime();
+		transform.position += forward * speed * antares::g_time.getDeltaTime();
 
-		m_physicsComponent->ApplyForce(forward * m_speed);
+		m_physicsComponent->ApplyForce(forward * speed);
 
 		transform.position.x = antares::Wrap(transform.position.x, (float)antares::g_renderer.GetWidth());
 		transform.position.y = antares::Wrap(transform.position.y, (float)antares::g_renderer.GetHeight());
@@ -59,7 +60,7 @@ namespace antares {
 		//}
 	}
 
-	void Enemy::OnCollision(Actor* other) {
+	void Enemy::OnCollisionEnter(Actor* other) {
 		if (other->tag == "PlayerBullet" && !m_destroyed) {
 			antares::EventManager::Instance().DispatchEvent("AddPoints", 100);
 			m_destroyed = true;
@@ -82,5 +83,11 @@ namespace antares {
 			emitter->tag = "Emitter";
 			m_scene->Add(std::move(emitter));
 		}
+	}
+
+	void Enemy::Read(const json_t& value) {
+		Actor::Read(value);
+		READ_DATA(value, speed);
+		READ_DATA(value, turnRate);
 	}
 }

@@ -32,12 +32,12 @@ namespace antares {
 		friend class Actor;
 
 	private:
-		std::list<std::unique_ptr<Actor>> m_actors;
+		std::list<std::unique_ptr<Actor>> actors;
 	};
 
 	template<typename T>
 	inline T* Scene::GetActor() {
-		for (auto& actor : m_actors) {
+		for (auto& actor : actors) {
 			T* result = dynamic_cast<T*>(actor.get());
 			if (result) return result;
 		}
@@ -46,7 +46,7 @@ namespace antares {
 	}
 	template<typename T>
 	inline T* Scene::GetActor(const std::string& name) {
-		for (auto& actor : m_actors) {
+		for (auto& actor : actors) {
 			if (actor->name == name);
 			T* result = dynamic_cast<T*>(actor.get());
 			if (result) return result;

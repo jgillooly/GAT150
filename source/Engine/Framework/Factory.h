@@ -61,7 +61,7 @@ namespace antares {
 	template<typename T>
 	inline void Factory::Register(const std::string& key) {
 		m_registry[key] = std::make_unique<Creator<T>>();
-		std::cout << "Registered in Factory" << std::endl;
+		std::cout << key << "Registered in Factory" << std::endl;
 	}
 
 	template<typename T>
@@ -74,8 +74,11 @@ namespace antares {
 	inline std::unique_ptr<T> Factory::Create(const std::string& key) {
 		auto iter = m_registry.find(key);
 		if (iter != m_registry.end()) {
+			std::cout << key << "Created" << std::endl;
 			return std::unique_ptr<T>(dynamic_cast<T*>(iter->second->Create().release()));
+			
 		}
+		return nullptr;
 	}
 }
 

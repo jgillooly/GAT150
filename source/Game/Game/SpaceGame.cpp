@@ -36,7 +36,7 @@ bool SpaceGame::Initialize() {
 	antares::g_audioSystem.AddAudio("music", "Music.wav");
 
 	m_scene = std::make_unique<antares::Scene>();
-	m_scene->Load("scene.json");
+	bool success = m_scene->Load("scenes/scene.json");
 	m_scene->Initialize();
 	m_state = SpaceGame::Title;
 	antares::g_particleSystem = antares::ParticleSystem(10000);
@@ -97,50 +97,21 @@ void SpaceGame::Uptdate(float dt) {
 		m_milestone = m_score;
 		float speed = 100;
 		constexpr float turnRate = antares::Degrees2Radians(180.0f);
-		std::unique_ptr<Player> player = std::make_unique<Player>(400.0f, antares::Pi, transform);
-		//std::unique_ptr<antares::SpriteComponent> component = std::make_unique<antares::SpriteComponent>();
-		auto component = CREATE_CLASS(SpriteComponent);
-		component->m_texture = GET_RESOURCE(antares::Texture, "Ship.png", antares::g_renderer);
-
-		//std::unique_ptr<antares::ModelRenderComponent> component = std::make_unique<antares::ModelRenderComponent>();
-		//component->m_model = antares::g_resMan.Get<antares::Model>("Diamond.txt");
-
-		auto physicsComponent = std::make_unique<antares::EnginePhysicsComponent>();
-		player->AddComponent(std::move(component));
-		player->AddComponent(std::move(physicsComponent));
-
-		auto cComponent = std::make_unique<antares::CircleCollisionComponent>();
-		cComponent->m_radius = 30.0f;
-		player->AddComponent(std::move(cComponent));
-
-		player->tag = "Player";
-		player->m_game = this;
-		player->transform.scale = 0.5f;
+		auto player = INSTANTIATE(Player, "Player");
+		player->transform = antares::Transform{ { 400, 300 }, 0, 1 };
 		player->Initialize();
 		m_scene->Add(std::move(player));
+
 		m_state = eState::Game;
 		break; }
 	case SpaceGame::Game:
 		//m_spawnTimer += dt;
 		if (m_spawnTimer >= m_spawnTime) {
 			m_spawnTimer = 0;
-			//int specialRoll = antares::random(1, 100);
-			//bool isSpecial = specialRoll <= 50;
-			//if (isSpecial) std::cout << "Special Spawned" << std::endl;
-			//float rotat = antares::randomf(antares::TwoPi);
-			//antares::Transform t1{ {400, 300}, rotat, 2};
-			////std::unique_ptr<antares::Enemy> enemy = std::make_unique<Enemy>(200.0f, 200.0f, t1);
-			//std::unique_ptr<antares::SpriteComponent> component1 = std::make_unique<antares::SpriteComponent>();
-			//component1->m_texture = GET_RESOURCE(antares::Texture, "Ship.png", antares::g_renderer);
-
-			//auto eCComponent = std::make_unique <antares::CircleCollisionComponent>();
-			//eCComponent->m_radius = 30.0f;
-			//enemy->AddComponent(std::move(eCComponent));
-			//enemy->tag = "Enemy";
-			//enemy->m_game = this;
-			//enemy->AddComponent(std::move(component1));
-			//enemy->Initialize();
-			//m_scene->Add(std::move(enemy));
+			auto enemy = INSTANTIATE(Enemy, "Enemy");
+			enemy->transform = antares::Transform{ { antares::random(800), antares::random(600) }, antares::randomf(antares::TwoPi), 1 };
+			enemy->Initialize();
+			m_scene->Add(std::move(enemy));
 		}
 		if (m_score >= m_milestone + 200) {
  			//int x = antares::random(100, antares::g_renderer.GetWidth() - 100);
@@ -183,7 +154,7 @@ void SpaceGame::Uptdate(float dt) {
 
 	//m_scoreText->Create(antares::g_renderer, "Score:" + std::to_string(m_score), antares::Color{ 1, 1, 1, 1 });
 	//m_livesText->Create(antares::g_renderer, "Lives:" + std::to_string(m_lives), antares::Color{ 1, 1, 1, 1 });
-	Player* p = m_scene->GetActor<Player>();
+	antares::Player* p = m_scene->GetActor<antares::Player>();
 	std::string status = "";
 	if (p) {
 		status = p->getBoostStatus();

@@ -3,6 +3,7 @@
 #include "box2d/b2_world.h"
 #include "box2d/box2d.h"
 #include "Core/Vector2.h"
+#include "ContactListener.h"
 #include <memory>
 #define VEC2_TO_B2VEC2(vec) (*(b2Vec2*)(&vec))
 #define B2VEC2_TO_VEC2(vec) (*(antares::Vector2*)(&vec))
@@ -39,6 +40,7 @@ namespace antares {
 		float m_pixelsPerUnit = 48.0f;
 	private:
 		std::unique_ptr<b2World> m_world;
+		std::unique_ptr<ContactListener> contactListener;
 	public:
 		b2Body* CreateBody(const vec2& position, float angle, const RigidBodyData& data);
 		void DestroyBody(b2Body* body);

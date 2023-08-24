@@ -9,7 +9,7 @@ void Pickup::Update(float dt) {
 	}
 }
 
-void Pickup::OnCollision(Actor* other) {
+void Pickup::OnCollisionEnter(Actor* other) {
 	if (other->tag == "Player") {
 		m_destroyed = true;
 		m_game->SetLives(m_game->GetLives() + 1);

@@ -22,7 +22,7 @@ namespace antares {
 	}
 
 	void Box2DCollisionComponent::Update(float dt) {
-
+		
 	}
 
 	void Box2DCollisionComponent::Read(const json_t& value) {

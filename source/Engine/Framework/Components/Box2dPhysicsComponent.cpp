@@ -35,7 +35,13 @@ namespace antares {
 		m_body->ApplyTorque(torque, true);
 	}
 
+	void Box2DPhysicsComponent::SetVelocity(const vec2& velocity) {
+		m_body->SetLinearVelocity(VEC2_TO_B2VEC2(velocity));
+	}
+
 	void Box2DPhysicsComponent::Read(const json_t& value) {
+		float damping;
+		READ_NAME_DATA(value, "damping", damping);
 		READ_NAME_DATA(value, "damping", data.damping);
 		READ_NAME_DATA(value, "angularDamping", data.angularDamping);
 		READ_NAME_DATA(value, "gravityScale", data.gravityScale);

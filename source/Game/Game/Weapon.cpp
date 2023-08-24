@@ -10,7 +10,7 @@ namespace antares {
 	void Weapon::Update(float dt) {
 		Actor::Update(dt);
 		antares::vec2 forward = antares::vec2{ 0, -1 }.Rotate(transform.rotation);
-		transform.position += forward * speed * antares::g_time.getDeltaTime();
+		m_physicsComponent->SetVelocity(forward * speed);
 
 	}
 
@@ -18,13 +18,14 @@ namespace antares {
 		Actor::Initialize();
 		auto sComponent = GetComponent<antares::RenderComponent>();
 		auto cComponent = GetComponent<antares::CircleCollisionComponent>();
+		m_physicsComponent = GetComponent<PhysicsComponent>();
 		if (cComponent && sComponent) {
 			cComponent->m_radius = sComponent->GetRadius() * transform.scale;
 		}
 		return true;
 	}
 
-	void Weapon::OnCollision(Actor* other) {
+	void Weapon::OnCollisionEnter(Actor* other) {
 		if ((tag == "EnemyBullet" && other->tag == "Player") || (tag == "PlayerBullet" && other->tag == "Enemy")) {
 			//m_owner->m_destroyed = true;
 		}

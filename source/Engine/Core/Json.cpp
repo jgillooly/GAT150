@@ -27,7 +27,7 @@ namespace antares {
 			if (required) ERROR_LOG("Cannot read required json data: " << name.c_str());
 			return false;
 		}
-		std::string str = value.GetString();
+		//std::string str = value.GetString();
 		data = value[name.c_str()].GetInt();
 		return true;
 	}
@@ -37,7 +37,7 @@ namespace antares {
 			if (required) ERROR_LOG("Cannot read required json data: " << name.c_str());
 			return false;
 		}
-		std::string str = value.GetString();
+		//std::string str = value.GetString();
 		data = value[name.c_str()].GetFloat();
 		return true;
 	}
@@ -47,7 +47,7 @@ namespace antares {
 			if (required) ERROR_LOG("Cannot read required json data: " << name.c_str());
 			return false;
 		}
-		std::string str = value.GetString();
+		//std::string str = value.GetString();
 		data = value[name.c_str()].GetBool();
 		return true;
 	}
@@ -57,7 +57,7 @@ namespace antares {
 			if (required) ERROR_LOG("Cannot read required json data: " << name.c_str());
 			return false;
 		}
-		std::string str = value.GetString();
+		//std::string str = value.GetString();
 		data = value[name.c_str()].GetString();
 		return true;
 	}

@@ -1,0 +1,21 @@
+{
+  "actors": [
+    {
+      "type": "Actor",
+      "name": "Background",
+      "persistent": true,
+      "transform": {
+        "position": [ 400, 300 ],
+        "scale": 2,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "SpriteComponent",
+          "textureName": "textures/background.png"
+        }
+      ]
+    }
+
+  ]
+}

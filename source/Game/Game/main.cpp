@@ -109,10 +109,9 @@ int main(int argc, char* argv[]) {
 	antares::Factory::Instance();
 	antares::PhysicsSystem::Instance().Initialize();
 	antares::seedRandom((unsigned int)time(NULL));
-	antares::setFilePath("assets");
-
-
-	antares::Factory::Instance().Register<antares::SpriteComponent>("SpriteComponent");
+	antares::setFilePath("Assets");
+	size_t size;
+	antares::getFileSize("scene.json", size);
 
 	vector<Star> stars;
 	antares::Renderer renderer;

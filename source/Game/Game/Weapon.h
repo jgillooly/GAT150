@@ -2,6 +2,7 @@
 #include "Renderer/Model.h"
 #include "Framework/Actor.h"
 #include "Framework/Components/Component.h"
+#include "Framework/Components/PhysicsComponent.h"
 namespace antares {
 	class Weapon : public Actor {
 	public:
@@ -18,9 +19,10 @@ namespace antares {
 
 		bool Initialize() override;
 
-		void OnCollision(Actor* other);
+		void OnCollisionEnter(Actor* other);
 	private:
 		float speed = 0;
 		float m_turnRate = 0;
+		antares::PhysicsComponent* m_physicsComponent;
 	};
 }
