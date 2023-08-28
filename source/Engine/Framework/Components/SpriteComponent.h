@@ -17,5 +17,6 @@ namespace antares {
 	public:
 		res_t<Texture> m_texture;
 		std::string textureName = "";
+		Rect source;
 	};
 }

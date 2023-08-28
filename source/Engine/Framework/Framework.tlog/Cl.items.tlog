@@ -5,6 +5,7 @@ C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\Box2dPhys
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\CircleCollisionComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\EnginePhysicsComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\ModelRenderComponent.cpp
+C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\SpriteAnimRenderComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\SpriteComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Emitter.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Event\Event.cpp

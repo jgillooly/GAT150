@@ -32,7 +32,10 @@ void PlatformGame::Uptdate(float dt) {
 	switch (m_state) {
 	case PlatformGame::Title:
 	{
-
+		//auto actor = INSTANTIATE(Actor,"Crate");
+		//actor->transform.position = { antares::random(0,antares::g_renderer.GetWidth()), 100 };
+		//actor->Initialize();
+		//m_scene->Add(std::move(actor));
 		break;
 	}
 	case PlatformGame::StartGame:

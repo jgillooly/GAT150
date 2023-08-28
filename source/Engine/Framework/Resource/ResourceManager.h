@@ -18,10 +18,17 @@ namespace antares {
 	inline res_t<T> ResourceManager::Get(const std::string& filename, TArgs ...args) {
 		if (m_resources.find(filename) != m_resources.end()) return std::dynamic_pointer_cast<T>(m_resources[filename]);
 
+		//resource not in resource manager, create it
 		res_t<T> resource = std::make_shared<T>();
+		//check if creation successful
 		resource->Create(filename, args...);
+		if (!resource.get()) {
+			WARNING_LOG("Could not create resource: " << filename);
+			return res_t<T>();
+		}
+		//add to resman
 		m_resources[filename] = resource;
-
+		//return the resource
 		return resource;
 	}
 }
