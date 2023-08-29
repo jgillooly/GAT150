@@ -35,4 +35,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\build\Assets\scenes\platformScene.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\build\Assets\scenes\tilemap.json">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

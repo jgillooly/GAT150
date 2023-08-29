@@ -22,5 +22,6 @@ namespace antares {
 		float jump = 0;
 		int groundCount = 0;
 		antares::PhysicsComponent* m_pComponent = nullptr;
+		class SpriteAnimRenderComponent* m_sComponent = nullptr;
 	};
 }

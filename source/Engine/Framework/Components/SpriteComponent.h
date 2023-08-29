@@ -18,5 +18,7 @@ namespace antares {
 		res_t<Texture> m_texture;
 		std::string textureName = "";
 		Rect source;
+		bool flipH = false;
+		vec2 origin{ 0.5f, 0.5f };
 	};
 }

@@ -30,5 +30,7 @@ namespace antares {
 	void SpriteComponent::Read(const json_t& value) {
 		READ_DATA(value, textureName);
 		READ_DATA(value, source);
+		READ_DATA(value, flipH);
+		READ_DATA(value, origin);
 	}
 }

@@ -15,6 +15,7 @@ bool PlatformGame::Initialize() {
 
 	m_scene = std::make_unique<antares::Scene>();
 	bool success = m_scene->Load("scenes/platformScene.json");
+	m_scene->Load("scenes/tilemap.json");
 	m_scene->Initialize();
 	m_state = PlatformGame::Title;
 	antares::g_particleSystem = antares::ParticleSystem(10000);

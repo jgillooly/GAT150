@@ -7,6 +7,7 @@ C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\EnginePhy
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\ModelRenderComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\SpriteAnimRenderComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\SpriteComponent.cpp
+C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Components\TilemapComponent.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Emitter.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Event\Event.cpp
 C:\Users\Joshua\source\repos\GAT150\source\Engine\Framework\Event\EventManager.cpp

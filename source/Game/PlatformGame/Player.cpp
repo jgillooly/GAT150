@@ -9,11 +9,16 @@
 #include "Framework/Components/EnginePhysicsComponent.h"
 #include "Framework/Components/CircleCollisionComponent.h"
 #include "Framework/Event/EventManager.h"
+#include "Framework/Components/SpriteAnimRenderComponent.h"
 namespace antares {
 	CLASS_DEFINITION(Player)
 		bool Player::Initialize() {
+
 		Actor::Initialize();
+		
 		m_pComponent = GetComponent<antares::PhysicsComponent>();
+		m_sComponent = GetComponent<SpriteAnimRenderComponent>();
+
 		return true;
 	}
 
@@ -37,8 +42,17 @@ namespace antares {
 
 		bool onGround = groundCount > 0;
 		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
-			antares::vec2 up = { 0.0, 50.0f };
-			m_pComponent->ApplyForce(up);
+			antares::vec2 up = { 0.0, -1.0f };
+			m_pComponent->SetVelocity(up * jump);
+		}
+		//animation
+		vec2 velocity = m_pComponent->m_velocity;
+		if (std::fabs(velocity.x) > 0.2) {
+			if (dir != 0) m_sComponent->flipH = (dir < 0);
+			m_sComponent->SetSequence("run");
+		}
+		else {
+			m_sComponent->SetSequence("idle");
 		}
 	}
 

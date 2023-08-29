@@ -88,7 +88,7 @@
         },
         {
           "type": "Box2DCollisionComponent",
-          "size": [ 600, 20 ]
+          "size": [ 800, 20 ]
         }
       ]
     },
@@ -96,8 +96,8 @@
       "type": "Player",
       "name": "Player",
       "persistent": true,
-      "speed": 10.0,
-      "jump": 100.0,
+      "speed": 65.0,
+      "jump": 15.0,
       "tag": "Player",
       "transform": {
         "position": [ 600, 300 ],
@@ -107,7 +107,7 @@
       "components": [
         {
           "type": "SpriteAnimRenderComponent",
-          "defaultSequence": "run",
+          "defaultSequence": "idle",
           "sequences": [
             {
               "name": "idle",
@@ -171,7 +171,7 @@
       "type": "Enemy",
       "name": "Enemy",
       "persistent": true,
-      "speed": 10.0,
+      "speed": 5.0,
       "jump": 100.0,
       "tag": "Enemy",
       "transform": {
@@ -202,7 +202,8 @@
           "constrainAngle": true
         },
         {
-          "type": "Box2DCollisionComponent"
+          "type": "Box2DCollisionComponent",
+          "isTrigger": true
         }
       ]
     }

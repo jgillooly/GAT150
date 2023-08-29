@@ -56,7 +56,7 @@ namespace antares {
 	}
 
 	void SpriteAnimRenderComponent::Draw(Renderer& renderer) {
-		renderer.DrawTexture(m_texture.get(), source, m_owner->transform);
+		renderer.DrawTexture(m_texture.get(), source, m_owner->transform, origin, flipH);
 	}
 
 	void SpriteAnimRenderComponent::Read(const json_t& value) {

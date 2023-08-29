@@ -16,5 +16,6 @@
 
 //Resources
 #include "Resource/ResourceManager.h"
+#include "Components/TilemapComponent.h"
 
 #include "Factory.h"

@@ -99,6 +99,24 @@ namespace antares {
 		// https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx
 		SDL_RenderCopyEx(m_renderer, texture->m_texture, (SDL_Rect*)(&source), &dest, angle, NULL, SDL_FLIP_NONE);
 	}
+	void Renderer::DrawTexture(Texture* texture, const Rect& source, const Transform transform, const vec2& origin, bool flip) {
+		mat3 mx = transform.GetMatrix();
+		vec2 size = vec2{ source.w, source.h } *mx.GetScale();
+		vec2 position = mx.GetTranslation();
+		SDL_Rect dest;
+		float angle = mx.GetRotation();
+		angle = antares::Radians2Degrees(angle);
+
+		dest.x = (int)(position.x - (size.x * origin.x));
+		dest.y = (int)(position.y - (size.y * origin.y));
+		dest.w = size.x;
+		dest.h = size.y;
+
+		SDL_Point center{ (int)(size.x * origin.x) , (int)(size.y * origin.y) };
+
+		// https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, (SDL_Rect*)(&source), &dest, angle, &center, (flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE));
+	}
 	Renderer g_renderer;
 }
 

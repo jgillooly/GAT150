@@ -4,6 +4,7 @@
 #include "Math/Rect.h"
 #include <string>
 #include "Vector2.h"
+#include <vector>
 
 #define READ_DATA(value, data) antares::Json::Read(value, #data, data)
 #define READ_DATA_REQUIRED(value, data) antares::Json::Read(value, #data, data, true)
@@ -26,6 +27,9 @@ namespace antares {
 		static bool Read(const rapidjson::Value& value, const std::string& name, vec2& data, bool required = false);
 		static bool Read(const rapidjson::Value& value, const std::string& name, Color& data, bool required = false);
 		static bool Read(const rapidjson::Value& value, const std::string& name, Rect& data, bool required = false);
+		static bool Read(const rapidjson::Value& value, const std::string& name, std::vector<std::string>& data, bool required = false);
+		static bool Read(const rapidjson::Value& value, const std::string& name, std::vector<int>& data, bool required = false);
+
 	};
 
 	using json_t = rapidjson::Value;

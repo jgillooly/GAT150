@@ -22,8 +22,7 @@ namespace antares {
 
 		Player* p = m_scene->GetActor<Player>();
 		antares::vec2 direction = p->transform.position - transform.position;
-
-
+		m_pComponent->ApplyForce(direction.Normalized() * speed);
 	}
 
 	void Enemy::OnCollisionEnter(Actor* other) {
