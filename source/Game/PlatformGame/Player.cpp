@@ -49,7 +49,7 @@ namespace antares {
 
 		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 			antares::vec2 up = { 0.0, -1.0f };
-			m_pComponent->SetVelocity(up * jump);
+			m_pComponent->SetVelocity(velocity + (up * jump));
 		}
 		//animation
 		if (std::fabs(velocity.x) > 0.2) {
