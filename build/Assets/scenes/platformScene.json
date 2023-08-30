@@ -96,7 +96,8 @@
       "type": "Player",
       "name": "Player",
       "persistent": true,
-      "speed": 65.0,
+      "speed": 50.0,
+      "maxSpeed": 8,
       "jump": 15.0,
       "tag": "Player",
       "transform": {

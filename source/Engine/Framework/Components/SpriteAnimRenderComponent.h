@@ -26,7 +26,7 @@ namespace antares {
 		bool Initialize() override;
 		void Update(float dt) override;
 
-		void SetSequence(const std::string& name);
+		void SetSequence(const std::string& name, bool sourceUpdate = true);
 		void UpdateSource();
 
 		void Draw(Renderer& renderer) override;

@@ -36,17 +36,22 @@ namespace antares {
 		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) {
 			dir = -1;
 		}
+		vec2 velocity = m_pComponent->m_velocity;
 		antares::vec2 forward = antares::vec2{ 1,0 };
 		antares::vec2 result = forward * 100 * dir;
-		m_pComponent->ApplyForce(forward * 50 * dir);
-
 		bool onGround = groundCount > 0;
+		if (dir) {
+			//m_pComponent->ApplyForce(forward * 50 * dir);
+			velocity.x += speed * dir * ((onGround) ? 1 : 0.25f);
+			velocity.x = Clamp(velocity.x, -maxSpeed, maxSpeed);
+			m_pComponent->SetVelocity(velocity);
+		}
+
 		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 			antares::vec2 up = { 0.0, -1.0f };
 			m_pComponent->SetVelocity(up * jump);
 		}
 		//animation
-		vec2 velocity = m_pComponent->m_velocity;
 		if (std::fabs(velocity.x) > 0.2) {
 			if (dir != 0) m_sComponent->flipH = (dir < 0);
 			m_sComponent->SetSequence("run");
@@ -73,5 +78,6 @@ namespace antares {
 		Actor::Read(value);
 		READ_DATA(value, speed);
 		READ_DATA(value, jump);
+		READ_DATA(value, maxSpeed);
 	}
 }

@@ -20,6 +20,7 @@ namespace antares {
 	private:
 		float speed = 0;
 		float jump = 0;
+		float maxSpeed = 0;
 		int groundCount = 0;
 		antares::PhysicsComponent* m_pComponent = nullptr;
 		class SpriteAnimRenderComponent* m_sComponent = nullptr;

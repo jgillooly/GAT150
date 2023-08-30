@@ -9,8 +9,10 @@ namespace antares {
 	bool SpriteAnimRenderComponent::Initialize() {
 		SpriteComponent::Initialize();
 
-		SetSequence(defaultSequenceName);
-		UpdateSource();
+		SetSequence(defaultSequenceName, false);
+		if (source.w == 0 && source.h == 0) {
+			UpdateSource();
+		}
 		return true;
 	}
 
@@ -22,13 +24,9 @@ namespace antares {
 		}
 		if (frame > m_sequence->endFrame) frame = (m_sequence->loop ? m_sequence->startFrame : m_sequence->endFrame);
 		UpdateSource();
-
-
-
-
 	}
 
-	void SpriteAnimRenderComponent::SetSequence(const std::string& name) {
+	void SpriteAnimRenderComponent::SetSequence(const std::string& name, bool sourceUpdate) {
 		//prevent setting to current sequence
 		if (m_sequence && m_sequence->name == name) return;
 		//check for finding sequence
@@ -41,6 +39,7 @@ namespace antares {
 			frame = m_sequence->startFrame;
 			frameTimer = 1.0f / m_sequence->fps;
 		}
+		if (sourceUpdate) UpdateSource();
 	}
 
 	void SpriteAnimRenderComponent::UpdateSource() {
