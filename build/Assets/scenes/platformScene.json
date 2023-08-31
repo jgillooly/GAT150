@@ -13,16 +13,17 @@
         {
           "type": "SpriteComponent",
           "textureName": "textures/background.png",
-          "source": [0,0,0,0]
+          "source": [ 0, 0, 0, 0 ]
         }
       ]
     },
     {
       "type": "Actor",
       "name": "Title",
+      "tag": "Title",
       "persistent": true,
       "transform": {
-        "position": [ 400, 300 ],
+        "position": [ 400, 200 ],
         "scale": 2,
         "rotation": 0
       },
@@ -31,7 +32,7 @@
           "type": "TextRenderComponent",
           "fontName": "Quattrocento.ttf",
           "fontSize": 24,
-          "text": "ASTEROIDZ",
+          "text": "Lil Dude",
           "color": [ 1, 0, 0, 1 ]
         }
       ]
@@ -39,6 +40,7 @@
     {
       "type": "Actor",
       "name": "Coin",
+      "tag": "Coin",
       "persistent": true,
       "transform": {
         "position": [ 400, 300 ],
@@ -73,42 +75,25 @@
       ]
     },
     {
-      "type": "Actor",
-      "tag": "Ground",
-      "transform": {
-        "position": [
-          400,
-          520
-        ]
-      },
-      "components": [
-        {
-          "type": "Box2DPhysicsComponent",
-          "isDynamic": false
-        },
-        {
-          "type": "Box2DCollisionComponent",
-          "size": [ 800, 20 ]
-        }
-      ]
-    },
-    {
       "type": "Player",
       "name": "Player",
       "persistent": true,
+      "prototype": true,
       "speed": 50.0,
       "maxSpeed": 8,
       "jump": 15.0,
       "tag": "Player",
       "transform": {
         "position": [ 600, 300 ],
-        "scale": 2,
+        "scale": 1,
         "rotation": 0
       },
       "components": [
         {
           "type": "SpriteAnimRenderComponent",
           "defaultSequence": "idle",
+          "origin": [ 0.5, 1.0 ],
+          "source": [ 0, 0, 16, 35 ],
           "sequences": [
             {
               "name": "idle",
@@ -172,7 +157,9 @@
       "type": "Enemy",
       "name": "Enemy",
       "persistent": true,
+      "prototype": true,
       "speed": 5.0,
+      "maxSpeed": 4,
       "jump": 100.0,
       "tag": "Enemy",
       "transform": {
@@ -205,6 +192,26 @@
         {
           "type": "Box2DCollisionComponent",
           "isTrigger": true
+        }
+      ]
+    },
+    {
+      "type": "Scoreboard",
+      "name": "Scoreboard",
+      "persistent": true,
+      "tag": "Scoreboard",
+      "transform": {
+        "position": [ 100, 100 ],
+        "scale": 2,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "TextRenderComponent",
+          "fontName": "Quattrocento.ttf",
+          "fontSize": 24,
+          "text": "000",
+          "color": [ 1, 0, 0, 1 ]
         }
       ]
     }

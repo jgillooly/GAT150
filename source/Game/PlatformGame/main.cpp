@@ -34,7 +34,8 @@ int main(int argc, char* argv[]) {
 	antares::g_inputSystem.Initialize();
 
 	antares::g_audioSystem.Initialize();
-
+	antares::g_audioSystem.AddAudio("jump", "audio/LaserShoot.wav");
+	antares::g_audioSystem.PlayOneShot("jump");
 
 	unique_ptr<PlatformGame> game = make_unique<PlatformGame>();
 	game->Initialize();

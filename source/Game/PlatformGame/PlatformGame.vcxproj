@@ -139,6 +139,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlatformGame.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Scoreboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Input\Input.vcxproj">
@@ -164,6 +165,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="PlatformGame.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Scoreboard.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\build\Assets\scenes\platformScene.json" />

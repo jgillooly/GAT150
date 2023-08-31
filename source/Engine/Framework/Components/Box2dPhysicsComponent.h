@@ -17,6 +17,7 @@ namespace antares {
 		virtual void ApplyForce(const vec2& force) override;
 		virtual void ApplyTorque(float torque) override;
 		virtual void SetVelocity(const vec2& velocity) override;
+		virtual void SetGravityScale(float scale) override;
 
 		friend class Box2DCollisionComponent;
 

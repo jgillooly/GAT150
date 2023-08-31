@@ -9,10 +9,15 @@ namespace antares {
 	bool Box2DCollisionComponent::Initialize() {
 		auto component = m_owner->GetComponent<Box2DPhysicsComponent>();
 		if (component) {
-			if (data.size.x == 0 && data.size.y == 0) {
-				auto sComponent = m_owner->GetComponent<SpriteComponent>();
-				data.size = vec2{ sComponent->source.w, sComponent->source.h };
+			
+			auto sComponent = m_owner->GetComponent<SpriteComponent>();
+			if (sComponent) {
+				if (data.size.x == 0 && data.size.y == 0) {
+					data.size = vec2{ sComponent->source.w, sComponent->source.h };
+				}
+				data.offset = sComponent->origin - vec2{ 0.5f, 0.5f };
 			}
+			
 			data.size = data.size * scaleOffset * m_owner->transform.scale;
 
 			if (component->m_body->GetType() == b2_staticBody) {

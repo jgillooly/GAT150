@@ -32,4 +32,5 @@ namespace antares {
 		if (min > max) std::swap(min, max);
 		return (value < min ? min : (value > max) ? max : value);
 	}
+
 }

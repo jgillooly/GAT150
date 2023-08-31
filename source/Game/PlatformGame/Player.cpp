@@ -10,6 +10,8 @@
 #include "Framework/Components/CircleCollisionComponent.h"
 #include "Framework/Event/EventManager.h"
 #include "Framework/Components/SpriteAnimRenderComponent.h"
+#include "Audio/AudioSystem.h"
+#include "PlatformGame.h"
 namespace antares {
 	CLASS_DEFINITION(Player)
 		bool Player::Initialize() {
@@ -47,10 +49,15 @@ namespace antares {
 			m_pComponent->SetVelocity(velocity);
 		}
 
-		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
+		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE) && jumps > 0) {
 			antares::vec2 up = { 0.0, -1.0f };
 			m_pComponent->SetVelocity(velocity + (up * jump));
+			jumps--;
+			antares::g_audioSystem.PlayOneShot("jump");
 		}
+
+		//m_pComponent->SetGravityScale((velocity.y > 0) ? 3.0f : 2.0f);
+
 		//animation
 		if (std::fabs(velocity.x) > 0.2) {
 			if (dir != 0) m_sComponent->flipH = (dir < 0);
@@ -64,6 +71,15 @@ namespace antares {
 	void Player::OnCollisionEnter(Actor* other) {
 		if (other->tag == "Ground") {
 			groundCount++;
+			if (other->transform.position.y > transform.position.y) jumps = 2;
+		}
+		else if (other->tag == "Enemy" && other->transform.position.y < transform.position.y) {
+			m_destroyed = true;
+			EventManager::Instance().DispatchEvent("OnPlayerDead", 0);
+		}
+		else if (other->tag == "Coin") {
+			other->m_destroyed = true;
+			EventManager::Instance().DispatchEvent("AddPoints", 100);
 		}
 	}
 

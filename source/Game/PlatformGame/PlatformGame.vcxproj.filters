@@ -23,6 +23,9 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scoreboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlatformGame.h">
@@ -32,6 +35,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scoreboard.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -47,9 +47,11 @@ namespace antares {
 	template<typename T>
 	inline T* Scene::GetActor(const std::string& name) {
 		for (auto& actor : actors) {
-			if (actor->name == name);
-			T* result = dynamic_cast<T*>(actor.get());
-			if (result) return result;
+			if (actor->name == name) {
+				T* result = dynamic_cast<T*>(actor.get());
+				if (result) return result;
+			}
 		}
+		return nullptr;
 	}
 }

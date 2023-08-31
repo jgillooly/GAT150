@@ -1,2 +1,3 @@
 INFO: EventManager.cpp(11) - Event Subscribed: AddPoints
+INFO: EventManager.cpp(11) - Event Subscribed: AddPoints
 INFO: EventManager.cpp(11) - Event Subscribed: OnPlayerDead

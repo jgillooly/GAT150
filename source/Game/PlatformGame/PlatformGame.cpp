@@ -5,6 +5,10 @@
 #include "../../Input/InputSystem.h"
 #include <memory>
 #include "Framework/Framework.h"
+#include "Enemy.h"
+#include "Framework/Actor.h"
+#include "Framework/Componenets/TextRenderComponent.h"
+#include "Player.h"
 
 bool PlatformGame::Initialize() {
 
@@ -22,6 +26,7 @@ bool PlatformGame::Initialize() {
 
 	antares::EventManager::Instance().Subscribe("AddPoints", this, std::bind(&PlatformGame::AddPoints, this, std::placeholders::_1));
 	antares::EventManager::Instance().Subscribe("OnPlayerDead", this, std::bind(&PlatformGame::OnPlayerDeath, this, std::placeholders::_1));
+	
 
 	return true;
 }
@@ -37,25 +42,48 @@ void PlatformGame::Uptdate(float dt) {
 		//actor->transform.position = { antares::random(0,antares::g_renderer.GetWidth()), 100 };
 		//actor->Initialize();
 		//m_scene->Add(std::move(actor));
+		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)) {
+			auto title = m_scene->GetActor<antares::Actor>("Title");
+			auto text = title->GetComponent<antares::TextRenderComponent>();
+			text->SetText("");
+			m_state = eState::StartGame;
+		}
+
 		break;
 	}
 	case PlatformGame::StartGame:
-		m_score = 0;
-		m_lives = 3;
+	{
+		auto player = INSTANTIATE(Player, "Player");
+		player->Initialize();
+		m_scene->Add(std::move(player));
 		m_state = eState::StartLevel;
 		break;
+	}
 	case PlatformGame::StartLevel:
-	{ 
+	{
+		m_state = eState::Game;
 	break; }
 	case PlatformGame::Game:
+		m_spawnTimer += dt;
+		if (m_spawnTimer >= m_spawnTime) {
+			m_spawnTimer = 0;
+			auto enemy = INSTANTIATE(Enemy, "Enemy");
+			enemy->transform = antares::Transform{ { antares::random(800), antares::random(600) }, antares::randomf(antares::TwoPi), 1 };
+			enemy->Initialize();
+			m_scene->Add(std::move(enemy));
+		}
 		
 		break;
 	case PlatformGame::PlayerDead:
 		
 		break;
 	case PlatformGame::GameOver:
-		
+	{
+		auto title = m_scene->GetActor<antares::Actor>("Title");
+		auto text = title->GetComponent<antares::TextRenderComponent>();
+		text->SetText("Game Over");
 		break;
+	}
 	default:
 		break;
 	}
@@ -72,10 +100,10 @@ void PlatformGame::Draw(antares::Renderer& renderer) {
 
 void PlatformGame::AddPoints(const antares::Event& event) {
 	m_score += std::get<int>(event.data);
-
+	std::cout << m_score;
 }
 
 void PlatformGame::OnPlayerDeath(const antares::Event& event) {
 	m_lives--;
-	SetState(eState::PlayerDead);
+	SetState(eState::GameOver);
 }
