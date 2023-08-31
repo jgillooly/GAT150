@@ -42,9 +42,10 @@
       "name": "Coin",
       "tag": "Coin",
       "persistent": true,
+      "prototype": true,
       "transform": {
         "position": [ 400, 300 ],
-        "scale": 2,
+        "scale": 1,
         "rotation": 0
       },
       "components": [
@@ -80,12 +81,12 @@
       "persistent": true,
       "prototype": true,
       "speed": 50.0,
-      "maxSpeed": 8,
+      "maxSpeed": 5,
       "jump": 15.0,
       "tag": "Player",
       "transform": {
         "position": [ 600, 300 ],
-        "scale": 1,
+        "scale": 2,
         "rotation": 0
       },
       "components": [

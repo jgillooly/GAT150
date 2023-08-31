@@ -42,7 +42,7 @@ void PlatformGame::Uptdate(float dt) {
 		//actor->transform.position = { antares::random(0,antares::g_renderer.GetWidth()), 100 };
 		//actor->Initialize();
 		//m_scene->Add(std::move(actor));
-		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)) {
+		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 			auto title = m_scene->GetActor<antares::Actor>("Title");
 			auto text = title->GetComponent<antares::TextRenderComponent>();
 			text->SetText("");
@@ -53,6 +53,11 @@ void PlatformGame::Uptdate(float dt) {
 	}
 	case PlatformGame::StartGame:
 	{
+		if (!m_scene->GetActor<antares::Actor>("Coin")) {
+			auto coin = INSTANTIATE(Actor, "Coin");
+			coin->Initialize();
+			m_scene->Add(std::move(coin));
+		}
 		auto player = INSTANTIATE(Player, "Player");
 		player->Initialize();
 		m_scene->Add(std::move(player));
@@ -75,13 +80,22 @@ void PlatformGame::Uptdate(float dt) {
 		
 		break;
 	case PlatformGame::PlayerDead:
-		
-		break;
-	case PlatformGame::GameOver:
 	{
 		auto title = m_scene->GetActor<antares::Actor>("Title");
 		auto text = title->GetComponent<antares::TextRenderComponent>();
 		text->SetText("Game Over");
+		m_state = eState::GameOver;
+		break;
+	}
+	case PlatformGame::GameOver:
+	{
+		if (antares::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !antares::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
+			auto title = m_scene->GetActor<antares::Actor>("Title");
+			auto text = title->GetComponent<antares::TextRenderComponent>();
+			text->SetText("Lil Dude");
+			//m_scene->RemoveAll();
+			m_state = eState::Title;
+		}
 		break;
 	}
 	default:
@@ -105,5 +119,5 @@ void PlatformGame::AddPoints(const antares::Event& event) {
 
 void PlatformGame::OnPlayerDeath(const antares::Event& event) {
 	m_lives--;
-	SetState(eState::GameOver);
+	SetState(eState::PlayerDead);
 }
